@@ -10,7 +10,7 @@ html {
   height: 100%;
   box-sizing: border-box;
   font-size: 16px;
-  background-color: #FBFAF5;
+  background-color: var(--darkWhite);
 }
 
 body {
@@ -23,7 +23,7 @@ body {
   font-size: 12px;
   line-height: 1.38;
   padding: 5%;
-  color: var(--colorMainText);
+  color: var(--darkGray);
 }
 
 *, *:before, *:after {

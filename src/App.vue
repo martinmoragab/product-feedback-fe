@@ -4,6 +4,7 @@
 <template>
   <router-view></router-view>
   <h1>Product Feedback</h1>
+  <el-button type="primary">Click</el-button>
 </template>
 
 <style>
@@ -11,7 +12,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   margin-top: 60px;
 }
 </style>
