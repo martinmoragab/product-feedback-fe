@@ -2,8 +2,7 @@
 </script>
 
 <template>
-  <h1>Product Feedback</h1>
-  <el-button type="primary">Click</el-button>
+  <router-view />
 </template>
 
 <style>
