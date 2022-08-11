@@ -2,6 +2,7 @@
 </script>
 
 <template>
+  <router-view></router-view>
   <h1>Product Feedback</h1>
 </template>
 
