@@ -19,10 +19,10 @@
 </script>
 
 <template>
-	<el-card>
+	<el-card class="feedback-card">
 		<div class="feedback-content">
 			<div class="vote-info">
-				<el-button type="primary">112</el-button>
+				<el-button class="vote">{{ feedback.votes }}</el-button>
 				<div class="feedback-info">
 					<h6>{{ feedback.title }}</h6>
 					<p>{{ feedback.details }}</p>
@@ -30,7 +30,7 @@
 				</div>
 			</div>
 			<div class="comments">
-				<p>Q</p>
+				<img class="question" src="../../../assets/images/Question.svg"/>
 				<p>{{ feedback.commentsCount }}</p>
 			</div>
 		</div>
@@ -57,7 +57,14 @@
 		}
 		.comments {
 			display: flex;
+			align-items: center;
 			justify-self: flex-end;
+			gap: 8px;
+			font-weight: bold;
+			.question {
+				width: 18px;
+				height: 16px;
+			}
 		}
 	}
 </style>
