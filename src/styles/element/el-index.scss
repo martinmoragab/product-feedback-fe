@@ -1,5 +1,6 @@
 .el-card {
 	border: none;
+	border-radius: 10px;
 	margin-bottom: 10px;
 	&.is-always-shadow {
 		box-shadow: none;
@@ -16,6 +17,14 @@
 			flex-direction: row;
 			align-items: center;
 			justify-content: space-around;
+		}
+	}
+	&.feedback-card {
+		cursor: pointer;
+		&:hover {
+			h6 {
+				color: var(--mainBlue);
+			}
 		}
 	}
 	&.row {
@@ -35,9 +44,11 @@
 
 .el-checkbox {
 	font-weight: 500;
-	border-radius: 10px;
 	color: var(--mainBlue);
 	background-color: var(--darkWhite);
+	&:hover {
+		background-color: #CFD7FF;
+	}
 	.el-checkbox__label {
 		padding: 0;
 	}
@@ -45,6 +56,7 @@
 		border: none;
 		border-radius: 10px;
 		&.el-checkbox--small {
+			border-radius: 10px;
 			padding: 15px;
 		}
 	}
@@ -60,7 +72,32 @@
 }
 
 .el-button {
+	border-radius: 10px;
 	font-family: 'Jost';
+	&.vote {
+		display: flex;
+		flex-direction: column;
+		color: var(--darkGray);
+		font-weight: bold;
+		font-size: 13px;
+		background-color: var(--darkWhite);
+		border: none;
+		padding: 25px 10px;
+		&::before {
+			content: "^";
+			color: var(--mainBlue);
+		}
+		&:hover {
+			background-color: #CFD7FF;
+		}
+		&:active, &.voted-by-user {
+			color: var(--white);
+			background-color: var(--mainBlue);
+			&::before {
+				color: var(--white);
+			}
+		}
+	}
 }
 
 .el-select {
@@ -77,4 +114,13 @@
 		color: var(--white);
 		font-weight: bold;
 	}
+}
+
+.el-tag {
+	border-radius: 10px;
+	border: none;
+	font-weight: 500;
+	color: var(--mainBlue);
+	background-color: var(--darkWhite);
+	padding: 5px 15px;
 }
