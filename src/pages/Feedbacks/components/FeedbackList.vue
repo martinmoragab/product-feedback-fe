@@ -30,7 +30,16 @@
 			status: 'Planning',
 			author: 'Laszlo',
 			commentsCount: 2,
-		}
+		},
+		{
+			id: 'qwe-123-rty-456',
+			title: 'Q&A within challenge hubs',
+			category: 'Enhancement',
+			details: 'Challenge specific Q&A would make for easy reference.',
+			status: 'Planning',
+			author: 'Author',
+			commentsCount: 10,
+		},
 	])
 </script>
 
