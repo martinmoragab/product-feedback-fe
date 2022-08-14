@@ -14,3 +14,16 @@ export interface Feedback {
 	commentsCount: number;
 	votes: number;
 }
+
+export interface Author {
+	id: string;
+	name: string;
+	username: string;
+	profilePicture: string;
+}
+
+export interface IndividualComment {
+	content: string;
+	author: Author;
+	date: string;
+}

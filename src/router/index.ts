@@ -1,9 +1,10 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import LogIn from '../pages/LogIn/index.vue';
 import SignUp from '../pages/SignUp/index.vue';
 import Feedbacks from '../pages/Feedbacks/index.vue';
+import FeedbackDetails from '../pages/FeedbackDetail/index.vue';
 
-const routes = [
+const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/login',
 		name: 'LogIn',
@@ -18,6 +19,11 @@ const routes = [
 		path: '/feedbacks',
 		name: 'Feedbacks',
 		component: Feedbacks,
+	},
+	{
+		path: '/feedbacks/:id',
+		name: 'FeedbackDetails',
+		component: FeedbackDetails,
 	}
 ];
 
