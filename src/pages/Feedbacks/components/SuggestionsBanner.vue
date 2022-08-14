@@ -29,7 +29,7 @@
 
 <template>
 	<el-card class="banner">
-		<h6>M</h6>
+		<img src="../../../assets/images/bulb.svg"/>
 		<h6>{{ suggestionsCount }} Suggestions</h6>
 		<p>Sort by:
 			<el-select v-model="sortBy" size="small">
