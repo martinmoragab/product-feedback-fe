@@ -21,6 +21,7 @@
 			status: 'Planning',
 			author: 'Martin Moraga',
 			commentsCount: 2,
+			votes: 20,
 		},
 		{
 			id: 'qwe-123-rty-456',
@@ -30,6 +31,7 @@
 			status: 'Planning',
 			author: 'Laszlo',
 			commentsCount: 2,
+			votes: 120,
 		},
 		{
 			id: 'qwe-123-rty-456',
@@ -39,6 +41,7 @@
 			status: 'Planning',
 			author: 'Author',
 			commentsCount: 10,
+			votes: 32,
 		},
 	])
 </script>

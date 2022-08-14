@@ -12,4 +12,5 @@ export interface Feedback {
 	status: string;
 	author: string;
 	commentsCount: number;
+	votes: number;
 }
