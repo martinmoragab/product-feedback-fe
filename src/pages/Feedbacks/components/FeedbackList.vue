@@ -9,10 +9,40 @@
 <script lang="ts" setup>
 	import { ref } from 'vue';
 	import type { Ref } from 'vue';
-	import { Feedback } from './@types';
+	import { Feedback } from '../../@types';
 	import FeedbackItem from './FeedbackItem.vue';
 
 	const feedbacks: Ref<Feedback[]> = ref([
+		{
+      id: 'asd-123-fgh-456',
+      title: 'Add a dark theme option',
+      category: 'Feature',
+      details: 'It would help people with',
+      status: 'Planning',
+      author: 'Martin Moraga',
+      commentsCount: 2,
+      votes: 20,
+    },
+    {
+      id: 'qwe-123-rty-456',
+      title: 'Allow video/image upload',
+      category: 'Feature',
+      details: 'Images and screencasts can enhance comments on solutions',
+      status: 'Planning',
+      author: 'Laszlo',
+      commentsCount: 2,
+      votes: 120,
+    },
+    {
+      id: 'qwe-123-rty-456',
+      title: 'Q&A within challenge hubs',
+      category: 'Enhancement',
+      details: 'Challenge specific Q&A would make for easy reference.',
+      status: 'Planning',
+      author: 'Author',
+      commentsCount: 10,
+      votes: 32,
+    },
 	])
 </script>
 

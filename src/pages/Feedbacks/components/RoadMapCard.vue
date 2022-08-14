@@ -7,7 +7,7 @@
 </script>
 
 <script lang="ts" setup>
-import { Status } from './@types';
+import { Status } from '../../@types';
 
 	const props = defineProps({
 		roadmapStatuses: {

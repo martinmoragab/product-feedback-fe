@@ -74,6 +74,10 @@
 .el-button {
 	border-radius: 10px;
 	font-family: 'Jost';
+	&.blue {
+		background-color: var(--mainBlue);
+		border-color: transparent;
+	}
 	&.vote {
 		display: flex;
 		flex-direction: column;
@@ -123,4 +127,8 @@
 	color: var(--mainBlue);
 	background-color: var(--darkWhite);
 	padding: 5px 15px;
+}
+
+.el-form {
+	width: 100%;
 }
