@@ -7,7 +7,8 @@
 </script>
 
 <script lang="ts" setup>
-	import type { Feedback } from './@types';
+	import type { Feedback } from '../../@types';
+	import { useRouter } from 'vue-router';
 
 	const props = defineProps({
 		feedback: {
@@ -16,10 +17,19 @@
 		}
 	})
 
+	const router = useRouter();
+
+	function goToDetails() {
+		router.push({
+			name: 'FeedbackDetails',
+			params: { id: props.feedback.id }
+		})
+	}
+
 </script>
 
 <template>
-	<el-card class="feedback-card">
+	<el-card class="feedback-card" @click="goToDetails">
 		<div class="feedback-content">
 			<div class="vote-info">
 				<el-button class="vote">{{ feedback.votes }}</el-button>
