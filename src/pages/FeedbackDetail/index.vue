@@ -33,7 +33,9 @@
 <template>
   <div class="details-page">
     <div class="header">
-      <el-button type="default" @click="goToFeedbacks">Go Back</el-button>
+      <el-button class="back-button" link @click="goToFeedbacks">
+        <img src="../../assets/images/back-arrow.png"/>Go Back
+      </el-button>
       <el-button type="primary" class="blue" size="large">Edit Feedback</el-button>
     </div>
     <FeedbackItem :feedback="feedback"/>
@@ -54,5 +56,8 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    img {
+      margin-right: 15px;
+    }
   }
 </style>
