@@ -9,8 +9,11 @@
 <script lang="ts" setup>
 	import { ref } from 'vue';
 	import type { Ref } from 'vue';
+	import { useRouter } from 'vue-router';
 	import { Feedback } from '../../@types';
 	import FeedbackItem from './FeedbackItem.vue';
+
+	const router = useRouter();
 
 	const feedbacks: Ref<Feedback[]> = ref([
 		{
@@ -44,6 +47,14 @@
       votes: 32,
     },
 	])
+
+	function goToCreateFeedback() {
+		router.push({
+			name: 'CreateFeedback',
+			params: { id: 'asd' }
+		})
+	}
+
 </script>
 
 <template>
@@ -60,7 +71,13 @@
 			<h6>There is no feedback yet.</h6>
 			<p>Got a suggestion? Found a bug that needs to be squashed?</p>
 			<p>We love hearing about new ideas to improve our app.</p>
-			<el-button  type="primary" size="large">+ Add Feedback</el-button>
+			<el-button 
+				type="primary"
+				size="large"
+				@click="goToCreateFeedback"
+			>
+				+ Add Feedback
+			</el-button>
 		</div>
 	</el-card>
 </template>

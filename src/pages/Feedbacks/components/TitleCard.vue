@@ -32,6 +32,7 @@
 	background-image: linear-gradient(to right, #71A7F6, #4789EE, #a93ee4, #d24e9d, #d24e9d);
 	h5, p {
 		margin: 0;
+		color: var(--white);
 	}
 	h5 {
 		margin-top: 30px;
