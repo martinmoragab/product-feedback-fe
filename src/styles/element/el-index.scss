@@ -108,16 +108,28 @@
 	.el-input {
 		border: none;
 	}
-	.el-input__wrapper {
-		background-color: transparent;
-		.el-icon {
+	&.transparent {
+		.el-input__wrapper {
+			background-color: transparent;
+			.el-icon {
+				color: var(--white);
+			}
+		}
+		.el-input__inner {
 			color: var(--white);
+			font-weight: bold;
 		}
 	}
-	.el-input__inner {
-		color: var(--white);
-		font-weight: bold;
+	.el-icon {
+		svg {
+			color: var(--mainBlue);
+		}
 	}
+}
+
+.el-input__wrapper, .el-textarea__inner {
+	padding: 10px 20px;
+	background-color: var(--mediumWhite);
 }
 
 .el-tag {
@@ -131,4 +143,10 @@
 
 .el-form {
 	width: 100%;
+	.el-form-item__label {
+		color: var(--lightGray);
+	}
+	.el-form-item.is-required:not(.is-no-asterisk) > .el-form-item__label:before {
+		content: ''
+	}
 }
