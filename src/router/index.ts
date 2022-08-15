@@ -3,6 +3,7 @@ import LogIn from '../pages/LogIn/index.vue';
 import SignUp from '../pages/SignUp/index.vue';
 import Feedbacks from '../pages/Feedbacks/index.vue';
 import FeedbackDetails from '../pages/FeedbackDetail/index.vue';
+import CreateFeedback from '../pages/CreateFeedback/index.vue';
 
 const routes: Array<RouteRecordRaw> = [
 	{
@@ -21,9 +22,14 @@ const routes: Array<RouteRecordRaw> = [
 		component: Feedbacks,
 	},
 	{
-		path: '/feedbacks/:id',
+		path: '/feedbacks/:id/details',
 		name: 'FeedbackDetails',
 		component: FeedbackDetails,
+	},
+	{
+		path: '/feedbacks/:id/create-new-feedback',
+		name: 'CreateFeedback',
+		component: CreateFeedback,
 	}
 ];
 
