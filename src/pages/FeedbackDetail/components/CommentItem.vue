@@ -1,11 +1,3 @@
-<script lang="ts">
-  export default {
-    name: 'CommentItem',
-    inheritAttrs: false,
-    customOptions: {}
-  }
-</script>
-
 <script lang="ts" setup>
   import { IndividualComment } from '../../@types';
 

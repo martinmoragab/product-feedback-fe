@@ -1,11 +1,8 @@
 <script lang="ts" setup>
-  import { useRouter, useRoute } from 'vue-router';
+  import { useRouter } from 'vue-router';
   import CreateFeedbackForm from './components/CreateFeedbackForm.vue';
 
   const router = useRouter();
-  const route = useRoute();
-
-  const feedbackId = route.params.id;
 
   function goToFeedbacks() {
     router.push({
@@ -34,7 +31,7 @@
     .back-button {
       align-self: flex-start;
       img {
-        margin-right: 15px;
+        margin-right: 1em;
       }
     }
   }

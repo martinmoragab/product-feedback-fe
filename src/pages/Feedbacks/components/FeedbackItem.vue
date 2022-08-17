@@ -1,11 +1,3 @@
-<script lang="ts">
-  export default {
-    name: 'FeedbackItem',
-    inheritAttrs: false,
-    customOptions: {}
-  }
-</script>
-
 <script lang="ts" setup>
 	import type { Feedback } from '../../@types';
 	import { useRouter } from 'vue-router';

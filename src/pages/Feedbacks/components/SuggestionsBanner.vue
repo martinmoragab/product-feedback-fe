@@ -1,11 +1,3 @@
-<script lang="ts">
-  export default {
-    name: 'SuggestionsBanner',
-    inheritAttrs: false,
-    customOptions: {}
-  }
-</script>
-
 <script lang="ts" setup>
 	import { ref, watch } from 'vue';
 	import { useRouter } from 'vue-router';

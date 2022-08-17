@@ -1,11 +1,3 @@
-<script lang="ts">
-  export default {
-    name: 'AddCommentForm',
-    inheritAttrs: false,
-    customOptions: {}
-  }
-</script>
-
 <script lang="ts" setup>
   import { reactive, ref, watch } from 'vue';
 

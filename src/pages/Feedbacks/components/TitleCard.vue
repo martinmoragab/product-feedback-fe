@@ -1,11 +1,3 @@
-<script lang="ts">
-  export default {
-    name: 'TitleCard',
-    inheritAttrs: false,
-    customOptions: {}
-  }
-</script>
-
 <script lang="ts" setup>
 
 	const props = defineProps({

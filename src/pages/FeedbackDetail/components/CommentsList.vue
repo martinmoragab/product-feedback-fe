@@ -1,11 +1,3 @@
-<script lang="ts">
-  export default {
-    name: 'CommentsList',
-    inheritAttrs: false,
-    customOptions: {}
-  }
-</script>
-
 <script lang="ts" setup>
   import type { Ref } from 'vue';
   import { ref } from 'vue';

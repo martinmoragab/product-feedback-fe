@@ -1,11 +1,3 @@
-<script lang="ts">
-  export default {
-    name: 'CreateFeedback',
-    inheritAttrs: false,
-    customOptions: {}
-  }
-</script>
-
 <script lang="ts" setup>
   import { reactive } from 'vue';
 

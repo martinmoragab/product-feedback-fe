@@ -1,11 +1,3 @@
-<script lang="ts">
-  export default {
-    name: 'FeedbackList',
-    inheritAttrs: false,
-    customOptions: {}
-  }
-</script>
-
 <script lang="ts" setup>
 	import { ref } from 'vue';
 	import type { Ref } from 'vue';

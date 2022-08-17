@@ -1,11 +1,3 @@
-<script lang="ts">
-  export default {
-    name: 'RoadMapCard',
-    inheritAttrs: false,
-    customOptions: {}
-  }
-</script>
-
 <script lang="ts" setup>
 import { Status } from '../../@types';
 
