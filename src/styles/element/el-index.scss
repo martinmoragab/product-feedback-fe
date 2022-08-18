@@ -78,6 +78,12 @@
 		background-color: var(--mainBlue);
 		border-color: transparent;
 	}
+	&.back-button {
+		align-self: flex-start;
+		img {
+			margin-right: 15px;
+		}
+	}
 	&.vote {
 		display: flex;
 		flex-direction: column;
@@ -102,6 +108,10 @@
 			}
 		}
 	}
+}
+
+.el-input__inner, .el-textarea__inner {
+	font-family: 'Jost';
 }
 
 .el-select {

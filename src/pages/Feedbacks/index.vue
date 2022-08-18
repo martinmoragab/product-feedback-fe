@@ -7,9 +7,10 @@
 	import SuggestionsBanner from './components/SuggestionsBanner.vue';
 	import FeedbackList from './components/FeedbackList.vue';
 
+	const filterOptions = ['All', 'UI', 'UX', 'Bug', 'Enhancement', 'Feature'];
+
 	let filtersSelected: Ref<string[]> = ref([]);
 	let sortingOption = ref('');
-	const filterOptions = ['All', 'UI', 'UX', 'Bug', 'Enhancement', 'Feature'];
 	const roadmapStatuses = [
 		{
 			name: 'Planned',
@@ -29,13 +30,11 @@
 	]
 
 	function setFilters(filters: string[]) {
-		console.log('filters', filters);
 		filtersSelected.value = filters;
 	};
 
 	function setSortingFilter(sortOption: string) {
 		sortingOption.value = sortOption;
-		console.log('sort', sortingOption.value);
 	}
 
 </script>
@@ -43,12 +42,12 @@
 <template>
 	<div class="feedbacks-page">
 		<div class="side-summary">
-			<TitleCard productName='Front End Mentor'/>
-			<FiltersCard @filters-selected="setFilters" :options="filterOptions"/>
+			<TitleCard productName='Front End Mentor' />
+			<FiltersCard @filters-selected="setFilters" :options="filterOptions" />
 			<RoadMapCard :roadmapStatuses="roadmapStatuses" />
 		</div>
 		<div>
-			<SuggestionsBanner :suggestionsCount="6" @sortingSelected="setSortingFilter"/>
+			<SuggestionsBanner :suggestionsCount="6" @sortingSelected="setSortingFilter" />
 			<FeedbackList />
 		</div>
 	</div>

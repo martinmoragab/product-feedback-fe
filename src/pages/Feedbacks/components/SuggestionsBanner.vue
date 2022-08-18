@@ -2,6 +2,8 @@
 	import { ref, watch } from 'vue';
 	import { useRouter } from 'vue-router';
 
+	const sortingOptions = ['Most upvotes', 'Least upvotes', 'Most comments', 'Least comments']; 
+
 	const props = defineProps({
 		suggestionsCount: {
 			type: Number,
@@ -13,7 +15,6 @@
 	const router = useRouter();
 
 	const sortBy = ref('Most upvotes');
-	const sortingOptions = ['Most upvotes', 'Least upvotes', 'Most comments', 'Least comments']; 
 
 	function goToCreateFeedback() {
 		router.push({
@@ -25,7 +26,6 @@
 	watch(sortBy, () => {
 		emit('sortingSelected', sortBy);
 	}, { immediate: true });
-
 </script>
 
 <template>
@@ -33,7 +33,11 @@
 		<img src="../../../assets/images/bulb.svg"/>
 		<h6>{{ suggestionsCount }} Suggestions</h6>
 		<p>Sort by:
-			<el-select v-model="sortBy" size="small" class="transparent">
+			<el-select
+				v-model="sortBy"
+				size="small"
+				class="transparent"
+			>
 				<el-option
 					v-for="option in sortingOptions"
 					:key="option"

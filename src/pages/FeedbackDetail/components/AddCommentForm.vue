@@ -4,7 +4,6 @@
   const commentForm = reactive({
     content: '',
   });
-
   const rules = reactive({
     content: [
       {
@@ -14,14 +13,12 @@
       },
     ]
   })
-
   const charactersLeft = ref(250);
 
   watch(commentForm, () => {
     const commentLength = commentForm.content.length;
     charactersLeft.value = 250 - commentLength;
   })
-
 </script>
 
 <template>
@@ -34,7 +31,11 @@
 			class="form"
     >
       <el-form-item prop="content">
-					<el-input v-model="commentForm.content" type="textarea" maxlength="250" />
+				<el-input
+					v-model="commentForm.content"
+					type="textarea"
+					maxlength="250"
+				/>
 			</el-form-item>
       <div class="characters-button">
         <p>{{ charactersLeft }} characters left</p>

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, watch } from 'vue';
+	import { ref, watch } from 'vue';
 	
 	const props = defineProps({
 		options: {
@@ -7,24 +7,31 @@ import { ref, watch } from 'vue';
 			required: true,
 		}
 	});
-
 	const emit = defineEmits(['filtersSelected']);
 
-	let filtersSelected = ref(['All']);
+	const filtersSelected = ref(['All']);
 
 	watch(filtersSelected, (newVal, oldVal = []) => {
 		if (oldVal?.includes('All') && newVal.length > 1) filtersSelected.value = filtersSelected.value.filter(filter => filter !== 'All');
 		if (oldVal?.length > 1 && newVal.includes('All')) filtersSelected.value = ['All'];
 		emit('filtersSelected', filtersSelected.value);
-	}, { immediate: true })
+	}, { immediate: true });
 
 </script>
 
 <template>
 	<el-card class="small">
 		<div class="filters">
-			<el-checkbox-group v-for="option in options" :key="option" v-model="filtersSelected">
-				<el-checkbox :label="option" border size="small"/>
+			<el-checkbox-group
+				v-for="option in options"
+				:key="option"
+				v-model="filtersSelected"
+			>
+				<el-checkbox
+					:label="option"
+					border
+					size="small"
+				/>
 			</el-checkbox-group>
 		</div>
 	</el-card>

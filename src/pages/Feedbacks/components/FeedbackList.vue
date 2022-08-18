@@ -46,7 +46,6 @@
 			params: { id: 'asd' }
 		})
 	}
-
 </script>
 
 <template>

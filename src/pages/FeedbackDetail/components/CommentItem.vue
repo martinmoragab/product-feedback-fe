@@ -7,7 +7,6 @@
       required: true,
     }
   })
-
 </script>
 
 <template>
@@ -37,14 +36,12 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+			text-align: left;
+			* {
+				margin: 0;
+			}
       .username {
         margin-bottom: 15px;
-      }
-      * {
-        margin: 0;
-      }
-      p {
-        text-align: left;
       }
     }
   }

@@ -9,12 +9,15 @@
       name: 'Feedbacks',
     })
   };
-
 </script>
 
 <template>
   <div class="create-feedback-page">
-    <el-button class="back-button" link @click="goToFeedbacks">
+    <el-button
+			class="back-button"
+			link
+			@click="goToFeedbacks"
+		>
       <img src="../../assets/images/back-arrow.png"/>Go Back
     </el-button>
     <CreateFeedbackForm />
@@ -28,11 +31,5 @@
     gap: 50px;
     max-width: 540px;
     margin: auto;
-    .back-button {
-      align-self: flex-start;
-      img {
-        margin-right: 1em;
-      }
-    }
   }
 </style>

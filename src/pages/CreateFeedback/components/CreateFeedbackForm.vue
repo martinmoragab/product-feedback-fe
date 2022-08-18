@@ -1,12 +1,12 @@
 <script lang="ts" setup>
   import { reactive } from 'vue';
 
+	const categories = ['All', 'UI', 'UX', 'Bug', 'Enhancement', 'Feature'];
   const newFeedback = reactive({
     title: '',
     category: 'Feature',
     detail: '',
   });
-
   const rules = reactive({
     title: [
       {
@@ -17,7 +17,7 @@
       {
         min: 5,
         message: 'Title should be greater than 5 characters',
-        trigger: 'blur'
+        trigger: 'change'
       }
     ],
     category: [
@@ -39,7 +39,6 @@
       }
     ]
   });
-  const categories = ['All', 'UI', 'UX', 'Bug', 'Enhancement', 'Feature'];
 
 </script>
 
@@ -54,7 +53,7 @@
 			class="form"
     >
       <div class="input-item">
-        <h6>Feedback Title</h6>
+        <h6 class="input-title">Feedback Title</h6>
         <el-form-item
           label="Add a short, descriptive headline"
           prop="title"
@@ -63,7 +62,7 @@
         </el-form-item>
       </div>
       <div class="input-item">
-        <h6>Category</h6>
+        <h6 class="input-title">Category</h6>
         <el-form-item
           label="Choose a category for your feedback"
           prop="category"
@@ -79,7 +78,7 @@
         </el-form-item>
       </div>
       <div class="input-item">
-        <h6>Feedback Detail</h6>
+        <h6 class="input-title">Feedback Detail</h6>
         <el-form-item
           label="Include any specific comments on what should be improved, added, etc."
           prop="detail"
@@ -124,7 +123,7 @@
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
-    h6 {
+    .input-title {
       margin: 0;
     }
   }

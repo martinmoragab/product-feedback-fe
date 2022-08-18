@@ -10,28 +10,55 @@
 	})
 	const rules = reactive({
 		firstName: [
-			{ required: true, message: 'First name is required', trigger: 'blur' }
+			{
+				required: true,
+				message: 'First name is required',
+				trigger: 'blur'
+			}
 		],
 		lastName: [
-			{ required: true, message: 'Last name is required', trigger: 'blur' }
+			{
+				required: true,
+				message: 'Last name is required',
+				trigger: 'blur'
+			}
 		],
 		username: [
-			{ required: true, message: 'Username is required', trigger: 'blur' }
+			{ 
+				required: true,
+				message: 'Username is required',
+				trigger: 'blur' 
+			}
 		],
 		email: [
-			{ required: true, message: 'Email is required', trigger: 'blur' },
-			{ type: 'email', message: 'Email must be a valid email', trigger: 'change' }
+			{
+				required: true,
+				message: 'Email is required',
+				trigger: 'blur' 
+			},
+			{ 
+				type: 'email',
+				message: 'Email must be a valid email',
+				trigger: 'change'
+			}
 		],
 		password: [
-			{ required: true, message: 'Password is required', trigger: 'blur' },
-			{ min: 3, message: 'Password must be greater than 3 characters', trigger: 'change' }
+			{ 
+				required: true,
+				message: 'Password is required',
+				trigger: 'blur'
+			},
+			{ 
+				min: 3,
+				message: 'Password must be greater than 3 characters',
+				trigger: 'change'
+			}
 		]
 	})
 
 	function signup() {
-		console.log(signupForm);
+		console.log('SignUp form', signupForm);
 	}
-
 </script>
 
 <template>
@@ -64,8 +91,8 @@
 </template>
 
 <style lang="scss">
-    .form {
-        margin: auto;
-        width: 50vw;
-    }
+	.form {
+		margin: auto;
+		width: 50vw;
+	}
 </style>

@@ -8,7 +8,6 @@
 			type: Object as () => Feedback,
 		}
 	})
-
 	const router = useRouter();
 
 	function goToDetails() {
@@ -18,13 +17,17 @@
 		})
 	}
 
+	function voteForFeedback(event: Event) {
+		event.stopPropagation();
+		console.log('Increased vote');
+	}
 </script>
 
 <template>
 	<el-card class="feedback-card" @click="goToDetails">
 		<div class="feedback-content">
 			<div class="vote-info">
-				<el-button class="vote">{{ feedback.votes }}</el-button>
+				<el-button class="vote" @click="voteForFeedback">{{ feedback.votes }}</el-button>
 				<div class="feedback-info">
 					<h6>{{ feedback.title }}</h6>
 					<p>{{ feedback.details }}</p>
@@ -32,7 +35,7 @@
 				</div>
 			</div>
 			<div class="comments">
-				<img class="question" src="../../../assets/images/Question.svg"/>
+				<img class="comment-icon" src="../../../assets/images/Question.svg"/>
 				<p>{{ feedback.commentsCount }}</p>
 			</div>
 		</div>
@@ -63,9 +66,9 @@
 			justify-self: flex-end;
 			gap: 8px;
 			font-weight: bold;
-			.question {
+			.comment-icon {
 				width: 18px;
-				height: 16px;
+				height: 18px;
 			}
 		}
 	}

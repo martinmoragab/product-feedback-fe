@@ -6,6 +6,7 @@
 
   const comments: Ref<IndividualComment[]> = ref([
     {
+			id: 'asd-123-fgh-456',
       content: 'Also, please allow styles to be applied based on system preferences. I would love to be able to browse Frontend Mentor in the evening after my device’s dark mode turns on without the bright background it currently has.',
       author: {
         id: 'asdf',
@@ -16,6 +17,7 @@
       date: '2022',
     },
     {
+			id: 'jkl-789-asd-123',
       content: 'Second this! I do a lot of night coding and reading.',
       author: {
         id: 'asdf',
@@ -26,7 +28,6 @@
       date: '2022',
     },
   ]);
-
 </script>
 
 <template>
@@ -34,7 +35,7 @@
     <ul class="comments-list">
       <CommentItem
         v-for="comment in comments"
-        :key="comment.content"
+        :key="comment.id"
         :comment="comment"
       />
     </ul>

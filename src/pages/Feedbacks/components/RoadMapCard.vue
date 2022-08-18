@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Status } from '../../@types';
+	import { Status } from '../../@types';
 
 	const props = defineProps({
 		roadmapStatuses: {
@@ -7,12 +7,11 @@ import { Status } from '../../@types';
 			required: true,
 		}
 	})
-
 </script>
 
 <template>
 	<el-card class="small road-map">
-		<div class="header">
+		<div class="title-and-link">
 			<h6>Roadmap</h6>
 			<router-link to="/road-map">View</router-link>
 		</div>
@@ -34,7 +33,7 @@ import { Status } from '../../@types';
 
 <style lang="scss" scoped>
 	.road-map {
-		.header, .status {
+		.title-and-link, .status {
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;

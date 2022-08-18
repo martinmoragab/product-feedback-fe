@@ -23,6 +23,7 @@ export interface Author {
 }
 
 export interface IndividualComment {
+	id: string;
 	content: string;
 	author: Author;
 	date: string;
