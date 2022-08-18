@@ -1,41 +1,52 @@
 <script setup lang="ts">
-    import { reactive } from 'vue'
+	import { reactive } from 'vue'
+	import { useRouter } from 'vue-router';
+	import useUserStore from '../../stores/UserStore';
 
-		const loginForm = reactive({
-			email: '',
-			password: '',
-		})
-		const rules = reactive({
-			email: [
-				{
-					required: true,
-					message: 'Email is required',
-					trigger: 'blur'
-				},
-				{
-					type: 'email',
-					message: 'Email must be a valid email',
-					trigger: 'change'
-				}
-			],
-			password: [
-				{
-					required: true,
-					message: 'Password is required',
-					trigger: 'blur'
-				},
-				{
-					min: 3,
-					message: 'Password must be greater than 3 characters',
-					trigger: 'change'
-				}
-			]
-		})
+	const userStore = useUserStore();
+	const router = useRouter();
 
-    function login() {
-        console.log(loginForm.email, loginForm.password);
-    }
+	const loginForm = reactive({
+		email: '',
+		password: '',
+	})
+	const rules = reactive({
+		email: [
+			{
+				required: true,
+				message: 'Email is required',
+				trigger: 'blur'
+			},
+			{
+				type: 'email',
+				message: 'Email must be a valid email',
+				trigger: 'change'
+			}
+		],
+		password: [
+			{
+				required: true,
+				message: 'Password is required',
+				trigger: 'blur'
+			},
+			{
+				min: 3,
+				message: 'Password must be greater than 3 characters',
+				trigger: 'change'
+			}
+		]
+	})
 
+	async function login() {
+		try {
+			await userStore.logIn(loginForm.email, loginForm.password);
+			router.push({
+				name: 'Feedbacks'
+			})
+		} catch (e) {
+			console.error(e);
+		}
+	}
 </script>
 
 <template>

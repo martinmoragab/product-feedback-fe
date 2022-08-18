@@ -4,17 +4,6 @@ export interface Status {
 	count: number;
 }
 
-export interface Feedback {
-	id: string;
-	title: string;
-	category: string;
-	details: string;
-	status: string;
-	author: string;
-	commentsCount: number;
-	votes: number;
-}
-
 export interface Author {
 	id: string;
 	name: string;
