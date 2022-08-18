@@ -62,32 +62,34 @@
 </script>
 
 <template>
-	<h1>Sign Up</h1>
-	<el-form
-		:model="signupForm"
-		:rules="rules"
-		label-position="top"
-		size="default"
-		class="form"
-	>
-		<el-form-item label="First name" prop="firstName">
-			<el-input v-model="signupForm.firstName" type="text" />
-		</el-form-item>
-		<el-form-item label="Last name" prop="lastName">
-			<el-input v-model="signupForm.lastName" type="text" />
-		</el-form-item>
-		<el-form-item label="Username" prop="username">
-			<el-input v-model="signupForm.username" type="text" />
-		</el-form-item>
-		<el-form-item label="Email" prop="email">
-			<el-input v-model="signupForm.email" type="text" />
-		</el-form-item>
-		<el-form-item label="Password" prop="password">
-			<el-input v-model="signupForm.password" type="password" />
-		</el-form-item>
-		<el-button type="primary" @click="signup">Sign Up</el-button>
-	</el-form>
-	<h6>Already have an account? <router-link to="/login">Log In!</router-link></h6>
+	<el-card>
+		<h1>Sign Up</h1>
+		<el-form
+			:model="signupForm"
+			:rules="rules"
+			label-position="top"
+			size="default"
+			class="form"
+		>
+			<el-form-item label="First name" prop="firstName">
+				<el-input v-model="signupForm.firstName" type="text" size="default" />
+			</el-form-item>
+			<el-form-item label="Last name" prop="lastName">
+				<el-input v-model="signupForm.lastName" type="text" />
+			</el-form-item>
+			<el-form-item label="Username" prop="username">
+				<el-input v-model="signupForm.username" type="text" />
+			</el-form-item>
+			<el-form-item label="Email" prop="email">
+				<el-input v-model="signupForm.email" type="text" />
+			</el-form-item>
+			<el-form-item label="Password" prop="password">
+				<el-input v-model="signupForm.password" type="password" />
+			</el-form-item>
+			<el-button type="primary" @click="signup">Sign Up</el-button>
+		</el-form>
+		<h6>Already have an account? <router-link to="/login">Log In!</router-link></h6>
+	</el-card>
 </template>
 
 <style lang="scss">

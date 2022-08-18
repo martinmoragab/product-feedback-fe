@@ -39,6 +39,7 @@
 </script>
 
 <template>
+	<el-card>
     <h1>Log In</h1>
     <el-form
 			:model="loginForm"
@@ -57,6 +58,7 @@
 		<h6>
 			Not registered? <router-link to="/signup">Sign Up!</router-link>
 		</h6>
+	</el-card>
 </template>
 
 <style lang="scss">
