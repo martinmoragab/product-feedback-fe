@@ -8,9 +8,6 @@
 	import FeedbackList from './components/FeedbackList.vue';
 
 	const filterOptions = ['All', 'UI', 'UX', 'Bug', 'Enhancement', 'Feature'];
-
-	let filtersSelected: Ref<string[]> = ref([]);
-	let sortingOption = ref('');
 	const roadmapStatuses = [
 		{
 			name: 'Planned',
@@ -29,6 +26,9 @@
 		},
 	]
 
+	let filtersSelected: Ref<string[]> = ref([]);
+	let sortingOption = ref('');
+
 	function setFilters(filters: string[]) {
 		filtersSelected.value = filters;
 	};
@@ -42,12 +42,12 @@
 <template>
 	<div class="feedbacks-page">
 		<div class="side-summary">
-			<TitleCard productName='Front End Mentor' />
+			<TitleCard productName="Meta" />
 			<FiltersCard @filters-selected="setFilters" :options="filterOptions" />
 			<RoadMapCard :roadmapStatuses="roadmapStatuses" />
 		</div>
 		<div>
-			<SuggestionsBanner :suggestionsCount="6" @sortingSelected="setSortingFilter" />
+			<SuggestionsBanner :suggestionsCount="3" @sortingSelected="setSortingFilter" />
 			<FeedbackList />
 		</div>
 	</div>
@@ -58,5 +58,9 @@
 	display: grid;
 	grid-template-columns: 250px auto;
 	gap: 10px;
+	@media screen and (max-width: 650px) {
+		display: flex;
+		flex-direction: column;
+	}
 }
 </style>

@@ -56,6 +56,7 @@
 			align-items: flex-start;
 			gap: 10px;
 			margin-left: 10px;
+			text-align: left;
 			* {
 				margin: 0;
 			}

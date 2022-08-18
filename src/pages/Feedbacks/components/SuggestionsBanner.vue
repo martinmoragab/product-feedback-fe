@@ -61,7 +61,6 @@
 		display: flex;
 		justify-content: space-between;
 		width: 100%;
-		height: 70px;
 		h6 {
 			color: var(--white);
 			margin: 12px 0;

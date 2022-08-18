@@ -9,6 +9,8 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
 			'@pages': path.resolve(__dirname, './src/pages'),
 			'@images': path.resolve(__dirname, './src/assets/images'),
+      '@stores': path.resolve(__dirname, './src/stores'),
+      '@services': path.resolve(__dirname, './src/services')
     },
   },
   plugins: [vue()]
