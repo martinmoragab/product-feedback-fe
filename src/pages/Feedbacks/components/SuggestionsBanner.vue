@@ -30,7 +30,7 @@
 
 <template>
 	<el-card class="banner">
-		<img src="../../../assets/images/bulb.svg"/>
+		<img src="@images/bulb.svg"/>
 		<h6>{{ suggestionsCount }} Suggestions</h6>
 		<p>Sort by:
 			<el-select

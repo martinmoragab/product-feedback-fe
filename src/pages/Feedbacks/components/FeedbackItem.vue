@@ -35,7 +35,7 @@
 				</div>
 			</div>
 			<div class="comments">
-				<img class="comment-icon" src="../../../assets/images/Question.svg"/>
+				<img class="comment-icon" src="@images/Question.svg"/>
 				<p>{{ feedback.commentsCount }}</p>
 			</div>
 		</div>

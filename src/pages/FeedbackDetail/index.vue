@@ -35,7 +35,7 @@
 				@click="goToFeedbacks"
 				link
 			>
-        <img src="../../assets/images/back-arrow.png"/>Go Back
+        <img src="@images/back-arrow.png"/>Go Back
       </el-button>
       <el-button
 				class="blue"
