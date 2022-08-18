@@ -6,7 +6,7 @@ const path = require('path');
 export default defineConfig({
 	resolve:{
     alias:{
-      '@' : path.resolve(__dirname, './src'),
+      '@': path.resolve(__dirname, './src'),
 			'@pages': path.resolve(__dirname, './src/pages'),
 			'@images': path.resolve(__dirname, './src/assets/images'),
     },
