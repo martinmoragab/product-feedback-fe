@@ -1,9 +1,10 @@
 <script lang="ts" setup>
   import { reactive, ref } from 'vue';
+	import type { Ref } from 'vue';
 	import { FeedbackParams } from '../../@types';
 	import useProductStore from '../../../stores/ProductStore';
 	import ProductService from '../../../services/Product';
-import { FormInstance } from 'element-plus';
+	import { FormInstance } from 'element-plus';
 
 	const categories = ['All', 'UI', 'UX', 'Bug', 'Enhancement', 'Feature'];
   const newFeedback = reactive({
@@ -43,8 +44,9 @@ import { FormInstance } from 'element-plus';
       }
     ]
   });
-	const createFeedbackForm = ref<FormInstance>();
+	const createFeedbackForm: any = ref<FormInstance>();
 	const formHasError = ref(false);
+	const showSuccessAlert = ref(false);
 
 	const productStore = useProductStore();
 	const productId = productStore.getProduct._id;
@@ -55,24 +57,48 @@ import { FormInstance } from 'element-plus';
 			product: productId,
 		}
 
-		await formEl.validate((valid, fields) => {
-			if (valid) ProductService.createFeedback(params);
-			else {
+		await formEl.validate((valid) => {
+			if (!valid) {
 				formHasError.value = true;
-				console.log(fields)
+				return;
 			}
 		})
+		try {
+			await ProductService.createFeedback(params);
+			formEl.resetFields();
+			showSuccessAlert.value = true;
+		} catch (e) {
+			console.error(e);
+		}
 	}
 
 	function closeAlert() {
 		formHasError.value = false;
+		showSuccessAlert.value = false;
 	}
 
 </script>
 
 <template>
-	<el-alert @close="closeAlert" effect='dark' title="Missing Fields" type="error" v-if="formHasError">
+	<el-alert
+		@close="closeAlert"
+		effect='dark'
+		title="Missing Fields"
+		type="error"
+		v-if="formHasError"
+	>
 		Please provide all required fields.
+	</el-alert>
+	<el-alert
+		@close="closeAlert"
+		effect='dark'
+		title="Success!"
+		type="success"
+		v-if="showSuccessAlert"
+	>
+		Your feedback was successfully created!
+		<br>
+		<router-link to="/feedbacks">Take me to feedbacks list</router-link>
 	</el-alert>
   <el-card>
     <div class="add-circle">+</div>
@@ -117,7 +143,6 @@ import { FormInstance } from 'element-plus';
         >
           <el-input v-model="newFeedback.details" type="textarea" />
         </el-form-item>
-				{{ newFeedback.details }}
       </div>
       <div class="action-buttons">
         <el-button type="info">Cancel</el-button>

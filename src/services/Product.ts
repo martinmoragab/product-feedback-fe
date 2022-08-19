@@ -54,5 +54,13 @@ export default {
     } catch (e) {
       throw e;
     }
+	},
+	async postComment(feedbackId: string | string[], comment: string) {
+		setAuthorization();
+		try {
+			await apiClient.post(`/feedback/${feedbackId}/new-comment`, { comment });
+		} catch (e) {
+			throw e;
+		}
 	}
 }

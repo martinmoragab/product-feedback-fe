@@ -1,20 +1,34 @@
 <script lang="ts" setup>
-  import { IndividualComment } from '../../@types';
+	import { computed } from '@vue/reactivity';
+	import { Comment } from '../../../stores/@types';
 
   const props = defineProps({
     comment: {
-      type: Object as () => IndividualComment,
+      type: Object as () => Comment,
       required: true,
     }
   })
+
+	const fullName = computed(() => {
+		const firstName = props.comment.author.firstName;
+		const lastName = props.comment.author.lastName;
+		return `${firstName} ${lastName}`;
+	})
+
+	const authorPic = computed(() => {
+		const sprites = 'micah';
+		const seed = props.comment.author._id;
+		return `https://avatars.dicebear.com/api/${sprites}/${seed}.svg`
+	})
+
 </script>
 
 <template>
   <div class="comment">
-    <img class="author-picture" :src="comment.author.profilePicture"/>
+    <img class="author-picture" :src="authorPic"/>
     <div class="comment-content">
-      <h6>{{ comment.author.name }}</h6>
-      <p class="username">{{ comment.author.username }}</p>
+      <h6>{{ fullName }}</h6>
+      <p class="username">@{{ comment.author.username }}</p>
       <p>{{ comment.content }}</p>
     </div>
   </div>
@@ -31,6 +45,7 @@
       height: 40px;
       border-radius: 50%;
       object-fit: cover;
+			background-color: var(--darkWhite);
     }
     .comment-content {
       display: flex;

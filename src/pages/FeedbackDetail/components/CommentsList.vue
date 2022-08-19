@@ -1,51 +1,59 @@
 <script lang="ts" setup>
   import type { Ref } from 'vue';
   import { ref } from 'vue';
-  import { IndividualComment } from '../../@types'
   import CommentItem from './CommentItem.vue';
+	import { Comment } from '../../../stores/@types';
+	import { computed } from '@vue/reactivity';
 
-  const comments: Ref<IndividualComment[]> = ref([
-    {
-			id: 'asd-123-fgh-456',
-      content: 'Also, please allow styles to be applied based on system preferences. I would love to be able to browse Frontend Mentor in the evening after my device’s dark mode turns on without the bright background it currently has.',
-      author: {
-        id: 'asdf',
-        name: 'Elijah Moss',
-        username: '@hexagon',
-        profilePicture: 'https://www.dmarge.com/wp-content/uploads/2021/01/dwayne-the-rock-.jpg',
-      },
-      date: '2022',
-    },
-    {
-			id: 'jkl-789-asd-123',
-      content: 'Second this! I do a lot of night coding and reading.',
-      author: {
-        id: 'asdf',
-        name: 'James Skinner',
-        username: '@hummingbird',
-        profilePicture: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80',
-      },
-      date: '2022',
-    },
-  ]);
+	const props = defineProps({
+		comments: {
+			required: true,
+			type: Object as () => Comment[],
+		}
+	})
+
+	const commentsCount = computed(() => {
+		const count = props.comments.length;
+		const word = count === 1 ? 'Comment' : 'Comments';
+		return `${count} ${word}`;
+	})
+
 </script>
 
 <template>
   <el-card>
-    <ul class="comments-list">
+    <ul class="comments-list" v-if="comments.length">
+			<h6 class="comments-count">{{ commentsCount }}</h6>
       <CommentItem
         v-for="comment in comments"
-        :key="comment.id"
+        :key="comment._id"
         :comment="comment"
       />
     </ul>
+		<div class="no-comments" v-else>
+			<img src="@images/inspector.svg" />
+			<h6>No comments yet.</h6>
+			<p>Add a new comment to start the conversation.</p>
+		</div>
   </el-card>
 </template>
 
 <style lang="scss" scoped>
-  .comments-list {
+  .comments-list, .no-comments {
     display: flex;
     flex-direction: column;
     gap: 10px;
+		.comments-count {
+			display: flex;
+			justify-self: flex-start;
+			margin: 10px 0;
+		}
   }
+	.no-comments {
+		width: 100%;
+		align-items: center;
+		* {
+			margin: 0;
+		}
+	}
 </style>
