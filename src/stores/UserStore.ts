@@ -1,10 +1,11 @@
 import { defineStore } from "pinia";
 import RegistrationService from '../services/Registration';
 import useProductStore from "./ProductStore";
+import { User } from "./@types";
 
 const useUserStore = defineStore('UserStore', {
   state: () => ({
-    user: {},
+    user: {} as User,
     token: '',
   }),
   persist: true,

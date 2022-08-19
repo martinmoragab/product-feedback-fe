@@ -1,30 +1,46 @@
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { ref, watch, onBeforeMount } from 'vue';
   import type { Ref } from 'vue';
-  import { useRouter } from 'vue-router';
-  import { Feedback } from '../@types';
+  import { useRouter, useRoute } from 'vue-router';
+  import { Feedback } from '../../stores/@types';
+	import ProductService from '../../services/Product';
   import FeedbackItem from '../Feedbacks/components/FeedbackItem.vue';
   import CommentsList from './components/CommentsList.vue';
   import AddCommentForm from './components/AddCommentForm.vue';
 
   const router = useRouter();
+	const route = useRoute();
 
+	const feedbackId = route.params.id;
   const feedback: Ref<Feedback> = ref({
-    id: 'asd-123-fgh-456',
-    title: 'Add a dark theme option',
-    category: 'Feature',
-    details: 'It would help people with',
-    status: 'Planning',
-    author: 'Martin Moraga',
-    commentsCount: 2,
-    votes: 20,
-  });
+		_id: '',
+		title: '',
+		category: '',
+		details: '',
+		status: '',
+		author: '',
+		product: '',
+		votes: {},
+		comments: [],
+	});
 
   function goToFeedbacks() {
     router.push({
       name: 'Feedbacks'
     })
   }
+
+	async function getFeedbackInformation() {
+		try {
+			const feedbackItem = await ProductService.getFeedback(feedbackId);
+			feedback.value = feedbackItem;
+			return feedback;
+		} catch (e) {
+			console.error(e);
+		}
+	}
+	
+	getFeedbackInformation();
 </script>
 
 <template>
@@ -45,7 +61,7 @@
 				Edit Feedback
 			</el-button>
     </div>
-    <FeedbackItem :feedback="feedback"/>
+    <FeedbackItem :feedback="feedback" @get-feedback="getFeedbackInformation"/>
     <CommentsList />
     <AddCommentForm />
   </div>

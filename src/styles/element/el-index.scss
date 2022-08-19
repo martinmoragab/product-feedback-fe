@@ -101,6 +101,7 @@
 		background-color: var(--darkWhite);
 		border: none;
 		padding: 25px 10px;
+		min-width: 38px;
 		&::before {
 			content: "^";
 			color: var(--mainBlue);

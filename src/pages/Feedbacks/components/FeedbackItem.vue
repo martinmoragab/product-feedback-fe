@@ -1,17 +1,29 @@
 <script lang="ts" setup>
-	import { computed } from '@vue/reactivity';
+	import { computed } from 'vue';
+	import type { ComputedRef } from 'vue';
 	import type { Feedback } from '../../../stores/@types';
 	import { useRouter } from 'vue-router';
+	import useUserStore from '../../../stores/UserStore';
+	import ProductService from '../../../services/Product';
 
 	const props = defineProps({
 		feedback: {
 			required: true,
 			type: Object as () => Feedback,
-		}
+		},
 	})
+
+	const emits = defineEmits(['getFeedback']);
 
 	const feedbackVotes = computed(() => {
 		return Object.keys(props.feedback.votes).length;
+	})
+
+	const userVoted: ComputedRef<boolean> = computed(() => {
+		const userStore = useUserStore();
+		const userId = userStore.getUser._id;
+		const votes = props.feedback.votes;
+		return votes.hasOwnProperty(userId);
 	})
 
 	const router = useRouter();
@@ -19,13 +31,18 @@
 	function goToDetails() {
 		router.push({
 			name: 'FeedbackDetails',
-			params: { id: props.feedback._id }
+			params: { id: props.feedback?._id }
 		})
 	}
 
-	function voteForFeedback(event: Event) {
+	async function voteForFeedback(event: Event) {
 		event.stopPropagation();
-		console.log('Increased vote');
+		try {
+			await ProductService.voteForFeedback(props.feedback._id);
+			emits('getFeedback');
+		} catch (e) {
+			console.error(e);
+		}
 	}
 </script>
 
@@ -33,7 +50,13 @@
 	<el-card class="feedback-card" @click="goToDetails">
 		<div class="feedback-content">
 			<div class="vote-info">
-				<el-button class="vote" @click="voteForFeedback">{{ feedbackVotes }}</el-button>
+				<el-button
+					class="vote"
+					:class="userVoted ? 'voted-by-user' : ''"
+					@click="voteForFeedback"
+				>
+					{{ feedbackVotes }}
+				</el-button>
 				<div class="feedback-info">
 					<h6>{{ feedback.title }}</h6>
 					<p>{{ feedback.details }}</p>
