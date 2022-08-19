@@ -1,11 +1,15 @@
 <script lang="ts" setup>
-  import { reactive } from 'vue';
+  import { reactive, ref } from 'vue';
+	import { FeedbackParams } from '../../@types';
+	import useProductStore from '../../../stores/ProductStore';
+	import ProductService from '../../../services/Product';
+import { FormInstance } from 'element-plus';
 
 	const categories = ['All', 'UI', 'UX', 'Bug', 'Enhancement', 'Feature'];
   const newFeedback = reactive({
     title: '',
     category: 'Feature',
-    detail: '',
+    details: '',
   });
   const rules = reactive({
     title: [
@@ -26,11 +30,11 @@
         trigger: 'change'
       }
     ],
-    detail: [
+    details: [
       {
         required: true,
         message: 'Can\'t be empty',
-        trigger: 'blur'
+        trigger: 'change'
       },
       {
         min: 10,
@@ -39,10 +43,37 @@
       }
     ]
   });
+	const createFeedbackForm = ref<FormInstance>();
+	const formHasError = ref(false);
+
+	const productStore = useProductStore();
+	const productId = productStore.getProduct._id;
+
+	async function createFeedback(formEl: FormInstance) {
+		const params: FeedbackParams = {
+			...newFeedback,
+			product: productId,
+		}
+
+		await formEl.validate((valid, fields) => {
+			if (valid) ProductService.createFeedback(params);
+			else {
+				formHasError.value = true;
+				console.log(fields)
+			}
+		})
+	}
+
+	function closeAlert() {
+		formHasError.value = false;
+	}
 
 </script>
 
 <template>
+	<el-alert @close="closeAlert" effect='dark' title="Missing Fields" type="error" v-if="formHasError">
+		Please provide all required fields.
+	</el-alert>
   <el-card>
     <div class="add-circle">+</div>
     <h5>Create New Feedback</h5>
@@ -51,6 +82,7 @@
 			:rules="rules"
 			label-position="top"
 			class="form"
+			ref="createFeedbackForm"
     >
       <div class="input-item">
         <h6 class="input-title">Feedback Title</h6>
@@ -81,14 +113,15 @@
         <h6 class="input-title">Feedback Detail</h6>
         <el-form-item
           label="Include any specific comments on what should be improved, added, etc."
-          prop="detail"
+          prop="details"
         >
-          <el-input v-model="newFeedback.detail" type="textarea" />
+          <el-input v-model="newFeedback.details" type="textarea" />
         </el-form-item>
+				{{ newFeedback.details }}
       </div>
       <div class="action-buttons">
         <el-button type="info">Cancel</el-button>
-        <el-button type="primary">Add Feedback</el-button>
+        <el-button type="primary" @click="createFeedback(createFeedbackForm)">Add Feedback</el-button>
       </div>
     </el-form>
   </el-card>

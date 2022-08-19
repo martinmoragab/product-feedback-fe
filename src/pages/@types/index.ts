@@ -15,6 +15,13 @@ export interface Feedback {
 	votes: number;
 }
 
+export interface FeedbackParams {
+	title: string;
+	category: string;
+	details: string;
+	product: string;
+}
+
 export interface Author {
 	id: string;
 	name: string;

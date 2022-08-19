@@ -1,7 +1,7 @@
 export interface Product {
   _id: string;
   name: string;
-  feedbacks: Feedback[] | [];
+  feedbacks: Feedback[];
 }
 
 export interface Feedback {
@@ -12,6 +12,7 @@ export interface Feedback {
   status: string;
   author: string;
   product: string;
+	votes: object;
   comments: Comment[];
 }
 
