@@ -2,43 +2,14 @@
 	import { ref } from 'vue';
 	import type { Ref } from 'vue';
 	import { useRouter } from 'vue-router';
-	import { Feedback } from '../../@types';
+	import { Feedback } from '../../../stores/@types';
+	import useProductStore from '../../../stores/ProductStore';
 	import FeedbackItem from './FeedbackItem.vue';
 
 	const router = useRouter();
+	const productStore = useProductStore();
 
-	const feedbacks: Ref<Feedback[]> = ref([
-		{
-      id: 'asd-123-fgh-456',
-      title: 'Add a dark theme option',
-      category: 'Feature',
-      details: 'It would help people with',
-      status: 'Planning',
-      author: 'Martin Moraga',
-      commentsCount: 2,
-      votes: 20,
-    },
-    {
-      id: 'qwe-123-rty-456',
-      title: 'Allow video/image upload',
-      category: 'Feature',
-      details: 'Images and screencasts can enhance comments on solutions',
-      status: 'Planning',
-      author: 'Laszlo',
-      commentsCount: 2,
-      votes: 120,
-    },
-    {
-      id: 'qwe-123-rty-456',
-      title: 'Q&A within challenge hubs',
-      category: 'Enhancement',
-      details: 'Challenge specific Q&A would make for easy reference.',
-      status: 'Planning',
-      author: 'Author',
-      commentsCount: 10,
-      votes: 32,
-    },
-	])
+	const feedbacks: Ref<Feedback[]> = ref(productStore.getFeedbacks);
 
 	function goToCreateFeedback() {
 		router.push({
@@ -52,7 +23,7 @@
 	<ul v-if="feedbacks.length > 0">
 		<FeedbackItem
 			v-for="feedback in feedbacks"
-			:key="feedback.id"
+			:key="feedback._id"
 			:feedback="feedback"
 		/>
 	</ul>

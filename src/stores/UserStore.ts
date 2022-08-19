@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
-import UserStore from '../services/Registration';
+import RegistrationService from '../services/Registration';
+import useProductStore from "./ProductStore";
 
 const useUserStore = defineStore('UserStore', {
   state: () => ({
@@ -9,11 +10,14 @@ const useUserStore = defineStore('UserStore', {
   persist: true,
   getters: {
     getUser: (state) => state.user,
+		getToken: (state) => state.token,
   },
   actions: {
     async logIn(email: string, password: string) {
-      const { user, token } = await UserStore.logIn(email, password);
-      this.user = user;
+      const { user, token } = await RegistrationService.logIn(email, password);
+			const productSore = useProductStore();
+			await productSore.setProducts();
+			this.user = user;
       this.token = token;
     }
   }

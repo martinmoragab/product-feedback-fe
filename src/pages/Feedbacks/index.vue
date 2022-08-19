@@ -1,6 +1,7 @@
 <script setup lang="ts">
-	import { ref } from 'vue';
+	import { ref, onBeforeMount } from 'vue';
 	import type { Ref } from 'vue';
+	import useProductStore from '../../stores/ProductStore';
 	import TitleCard from './components/TitleCard.vue';
 	import FiltersCard from './components/FiltersCard.vue';
 	import RoadMapCard from './components/RoadMapCard.vue';
@@ -26,6 +27,9 @@
 		},
 	]
 
+	const productStore = useProductStore();
+	const product = productStore.getProduct;
+	const feedbacksCount = ref(productStore.getFeedbacksCount);
 	let filtersSelected: Ref<string[]> = ref([]);
 	let sortingOption = ref('');
 
@@ -37,17 +41,21 @@
 		sortingOption.value = sortOption;
 	}
 
+	onBeforeMount(() => {
+		productStore.setFeedbacks();
+	})
+
 </script>
 
 <template>
 	<div class="feedbacks-page">
 		<div class="side-summary">
-			<TitleCard productName="Meta" />
+			<TitleCard :productName="product.name" />
 			<FiltersCard @filters-selected="setFilters" :options="filterOptions" />
 			<RoadMapCard :roadmapStatuses="roadmapStatuses" />
 		</div>
 		<div>
-			<SuggestionsBanner :suggestionsCount="3" @sortingSelected="setSortingFilter" />
+			<SuggestionsBanner :suggestionsCount="feedbacksCount" @sortingSelected="setSortingFilter" />
 			<FeedbackList />
 		</div>
 	</div>

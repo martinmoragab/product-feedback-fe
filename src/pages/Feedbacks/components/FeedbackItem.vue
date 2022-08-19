@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-	import type { Feedback } from '../../@types';
+	import { computed } from '@vue/reactivity';
+	import type { Feedback } from '../../../stores/@types';
 	import { useRouter } from 'vue-router';
 
 	const props = defineProps({
@@ -8,12 +9,17 @@
 			type: Object as () => Feedback,
 		}
 	})
+
+	const feedbackVotes = computed(() => {
+		return Object.keys(props.feedback.votes).length;
+	})
+
 	const router = useRouter();
 
 	function goToDetails() {
 		router.push({
 			name: 'FeedbackDetails',
-			params: { id: props.feedback.id }
+			params: { id: props.feedback._id }
 		})
 	}
 
@@ -27,7 +33,7 @@
 	<el-card class="feedback-card" @click="goToDetails">
 		<div class="feedback-content">
 			<div class="vote-info">
-				<el-button class="vote" @click="voteForFeedback">{{ feedback.votes }}</el-button>
+				<el-button class="vote" @click="voteForFeedback">{{ feedbackVotes }}</el-button>
 				<div class="feedback-info">
 					<h6>{{ feedback.title }}</h6>
 					<p>{{ feedback.details }}</p>
@@ -36,7 +42,7 @@
 			</div>
 			<div class="comments">
 				<img class="comment-icon" src="@images/Question.svg"/>
-				<p>{{ feedback.commentsCount }}</p>
+				<p>{{ feedback.comments.length }}</p>
 			</div>
 		</div>
 	</el-card>

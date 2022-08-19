@@ -168,3 +168,13 @@
 		content: ''
 	}
 }
+
+.el-alert {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	min-width: 300px;
+	text-align: left;
+	width: auto;
+	z-index: 99;
+}
