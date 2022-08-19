@@ -1,3 +1,12 @@
+export interface User {
+	_id: string;
+	email: string;
+	firstName: string;
+	lastName: string;
+	username: string;
+	products: Array<Object>;
+}
+
 export interface Product {
   _id: string;
   name: string;
