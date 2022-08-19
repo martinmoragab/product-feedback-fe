@@ -19,10 +19,18 @@ export default {
       throw e;
     }
   },
-	async getFeedbacks(id: string) {
+	async getFeedbacks(productId: string) {
 		try {
-			const response = await apiClient.get(`/feedback/all/${id}`)
+			const response = await apiClient.get(`/feedback/all/${productId}`)
 			return response.data.feedbacks;
+		} catch (e) {
+			throw e;
+		}
+	},
+	async getFeedback(feedbackId: string | string[]) {
+		try {
+			const response = await apiClient.get(`/feedback/${feedbackId}`);
+			return response.data.feedback;
 		} catch (e) {
 			throw e;
 		}
@@ -38,5 +46,13 @@ export default {
     } catch (e) {
       throw e;
     }
-  }
+  },
+	async voteForFeedback(feedbackId: string) {
+		setAuthorization();
+    try {
+      await apiClient.patch(`/feedback/${feedbackId}/vote`)
+    } catch (e) {
+      throw e;
+    }
+	}
 }
