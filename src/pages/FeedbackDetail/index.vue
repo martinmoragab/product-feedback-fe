@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { ref, watch, onBeforeMount } from 'vue';
+  import { ref } from 'vue';
   import type { Ref } from 'vue';
   import { useRouter, useRoute } from 'vue-router';
   import { Feedback } from '../../stores/@types';
@@ -34,7 +34,6 @@
 		try {
 			const feedbackItem = await ProductService.getFeedback(feedbackId);
 			feedback.value = feedbackItem;
-			return feedback;
 		} catch (e) {
 			console.error(e);
 		}
@@ -62,8 +61,8 @@
 			</el-button>
     </div>
     <FeedbackItem :feedback="feedback" @get-feedback="getFeedbackInformation"/>
-    <CommentsList />
-    <AddCommentForm />
+    <CommentsList :comments="feedback.comments" />
+    <AddCommentForm @get-feedback="getFeedbackInformation" />
   </div>
 </template>
 

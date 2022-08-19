@@ -28,5 +28,6 @@ export interface Feedback {
 export interface Comment {
   content: string;
   _id: string;
+	author: User;
   date: string;
 }
