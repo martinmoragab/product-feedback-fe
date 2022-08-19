@@ -1,15 +1,13 @@
 <script lang="ts" setup>
-	import { ref } from 'vue';
-	import type { Ref } from 'vue';
+	import { storeToRefs } from 'pinia';
 	import { useRouter } from 'vue-router';
-	import { Feedback } from '../../../stores/@types';
 	import useProductStore from '../../../stores/ProductStore';
 	import FeedbackItem from './FeedbackItem.vue';
 
 	const router = useRouter();
 	const productStore = useProductStore();
 
-	const feedbacks: Ref<Feedback[]> = ref(productStore.getFeedbacks);
+	const { feedbacks } = storeToRefs(productStore);
 
 	function goToCreateFeedback() {
 		router.push({
@@ -25,6 +23,7 @@
 			v-for="feedback in feedbacks"
 			:key="feedback._id"
 			:feedback="feedback"
+			@get-feedback="productStore.setFeedbacks"
 		/>
 	</ul>
 	<el-card v-else>
