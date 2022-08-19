@@ -1,9 +1,10 @@
 <script lang="ts" setup>
   import { reactive, ref } from 'vue';
+	import type { Ref } from 'vue';
 	import { FeedbackParams } from '../../@types';
 	import useProductStore from '../../../stores/ProductStore';
 	import ProductService from '../../../services/Product';
-import { FormInstance } from 'element-plus';
+	import { FormInstance } from 'element-plus';
 
 	const categories = ['All', 'UI', 'UX', 'Bug', 'Enhancement', 'Feature'];
   const newFeedback = reactive({
@@ -43,7 +44,7 @@ import { FormInstance } from 'element-plus';
       }
     ]
   });
-	const createFeedbackForm = ref<FormInstance>();
+	const createFeedbackForm: any = ref<FormInstance>();
 	const formHasError = ref(false);
 
 	const productStore = useProductStore();
@@ -59,7 +60,6 @@ import { FormInstance } from 'element-plus';
 			if (valid) ProductService.createFeedback(params);
 			else {
 				formHasError.value = true;
-				console.log(fields)
 			}
 		})
 	}
