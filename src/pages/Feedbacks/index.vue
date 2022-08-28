@@ -9,27 +9,11 @@
 	import FeedbackList from './components/FeedbackList.vue';
 
 	const filterOptions = ['All', 'UI', 'UX', 'Bug', 'Enhancement', 'Feature'];
-	const roadmapStatuses = [
-		{
-			name: 'Planned',
-			class: 'planned',
-			count: 3,
-		},
-		{
-			name: 'In Progress',
-			class: 'in-progress',
-			count: 5,
-		},
-		{
-			name: 'Live',
-			class: 'live',
-			count: 1,
-		},
-	]
 
 	const productStore = useProductStore();
 	const product = productStore.getProduct;
 	const feedbacksCount = ref(productStore.getFeedbacksCount);
+	const roadmapStatuses = ref(productStore.getRoadmap);
 	let filtersSelected: Ref<string[]> = ref([]);
 	let sortingOption = ref('');
 

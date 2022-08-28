@@ -22,7 +22,8 @@ export default {
 	async getFeedbacks(productId: string) {
 		try {
 			const response = await apiClient.get(`/feedback/all/${productId}`)
-			return response.data.feedbacks;
+			const { feedbacks, roadmapCounts } = response.data;
+			return { feedbacks, roadmapCounts }
 		} catch (e) {
 			throw e;
 		}

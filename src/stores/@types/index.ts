@@ -8,26 +8,31 @@ export interface User {
 }
 
 export interface Product {
-  _id: string;
-  name: string;
-  feedbacks: Feedback[];
+	_id: string;
+	name: string;
+	feedbacks: Feedback[];
 }
 
 export interface Feedback {
-  _id: string;
-  title: string;
-  category: string;
-  details: string;
-  status: string;
-  author: string;
-  product: string;
+	_id: string;
+	title: string;
+	category: string;
+	details: string;
+	status: string;
+	author: string;
+	product: string;
 	votes: object;
-  comments: Comment[];
+	comments: Comment[];
 }
 
 export interface Comment {
-  content: string;
-  _id: string;
+	content: string;
+	_id: string;
 	author: User;
-  date: string;
+	date: string;
+}
+export interface Roadmap {
+	in_progress: number;
+	live: number;
+	planned: number;
 }

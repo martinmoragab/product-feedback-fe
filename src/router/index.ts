@@ -5,7 +5,6 @@ import SignUp from '@pages/SignUp/index.vue';
 import Feedbacks from '@pages/Feedbacks/index.vue';
 import FeedbackDetails from '@pages/FeedbackDetail/index.vue';
 import CreateFeedback from '@pages/CreateFeedback/index.vue';
-import next from 'next';
 
 const routes: Array<RouteRecordRaw> = [
 	{

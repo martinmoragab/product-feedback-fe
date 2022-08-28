@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-	import { Status } from '../../@types';
+	import { Roadmap } from '../../../stores/@types';
 
 	const props = defineProps({
 		roadmapStatuses: {
-			type: Object as () => Status[],
+			type: Object as () => Roadmap,
 			required: true,
 		}
 	})
@@ -16,16 +16,26 @@
 			<router-link to="/road-map">View</router-link>
 		</div>
 		<div class="road-map-count">
-			<div
-				v-for="status in roadmapStatuses"
-				:key="status.name"
-				class="status"
-			>
+			<div class="status">
 				<div class="status-color">
-					<div class="color" :class="status.class"></div>
-					<p>{{ status.name }}</p>
+					<div class="color planned"></div>
+					<p>Planned</p>
 				</div>
-				<h6>{{ status.count }}</h6>
+				<h6>{{ roadmapStatuses.planned }}</h6>
+			</div>
+			<div class="status">
+				<div class="status-color">
+					<div class="color in_progress"></div>
+					<p>In Progress</p>
+				</div>
+				<h6>{{ roadmapStatuses.in_progress }}</h6>
+			</div>
+			<div class="status">
+				<div class="status-color">
+					<div class="color live"></div>
+					<p>Live</p>
+				</div>
+				<h6>{{ roadmapStatuses.live }}</h6>
 			</div>
 		</div>
 	</el-card>
@@ -62,7 +72,7 @@
 					&.planned {
 						background-color: var(--orange);
 					}
-					&.in-progress {
+					&.in_progress {
 						background-color: var(--mainPurple);
 					}
 					&.live {
