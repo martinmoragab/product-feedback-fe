@@ -5,6 +5,7 @@ import SignUp from '@pages/SignUp/index.vue';
 import Feedbacks from '@pages/Feedbacks/index.vue';
 import FeedbackDetails from '@pages/FeedbackDetail/index.vue';
 import CreateFeedback from '@pages/CreateFeedback/index.vue';
+import EditFeedback from '@pages/EditFeedback/index.vue';
 
 const routes: Array<RouteRecordRaw> = [
 	{
@@ -35,6 +36,14 @@ const routes: Array<RouteRecordRaw> = [
 		path: '/feedbacks/:id/details',
 		name: 'FeedbackDetails',
 		component: FeedbackDetails,
+		meta: {
+			requiresCredentials: true
+		}
+	},
+  {
+		path: '/feedbacks/:id/details/edit-feedback',
+		name: 'EditFeedback',
+		component: EditFeedback,
 		meta: {
 			requiresCredentials: true
 		}

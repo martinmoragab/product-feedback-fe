@@ -1,31 +1,30 @@
 <script lang="ts" setup>
   import { useRouter } from 'vue-router';
-  import FeedbackForm from './components/FeedbackForm.vue';
+  import FeedbackForm from '../CreateFeedback/components/FeedbackForm.vue';
 
   const router = useRouter();
 
-  function goToFeedbacks() {
-    router.push({
-      name: 'Feedbacks',
-    })
-  };
+  function goBack() {
+    router.back()
+  }
+
 </script>
 
 <template>
-  <div class="create-feedback-page">
+	<div class="edit-feedback-page">
     <el-button
 			class="back-button"
 			link
-			@click="goToFeedbacks"
+      @click="goBack"
 		>
       <img src="@images/back-arrow.png"/>Go Back
     </el-button>
-    <FeedbackForm />
+    <FeedbackForm type="edit" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-  .create-feedback-page {
+  .edit-feedback-page {
     display: flex;
     flex-direction: column;
     gap: 50px;

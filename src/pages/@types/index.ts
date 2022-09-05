@@ -20,6 +20,7 @@ export interface FeedbackParams {
 	category: string;
 	details: string;
 	product: string;
+  status?: string;
 }
 
 export interface Author {

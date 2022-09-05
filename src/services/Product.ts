@@ -19,9 +19,9 @@ export default {
       throw e;
     }
   },
-	async getFeedbacks(productId: string) {
+	async getFeedbacks(productId: string, filters: string[]) {
 		try {
-			const response = await apiClient.get(`/feedback/all/${productId}`)
+			const response = await apiClient.get(`/feedback/all/${productId}${ filters.length ? `?category=${ filters.toString(',') }` : '' }`);
 			const { feedbacks, roadmapCounts } = response.data;
 			return { feedbacks, roadmapCounts }
 		} catch (e) {
@@ -44,6 +44,26 @@ export default {
           ...params
         }
       });
+    } catch (e) {
+      throw e;
+    }
+  },
+  async editFeedback(params: FeedbackParams, id: string) {
+		setAuthorization();
+    try {
+      const response = await apiClient.patch(`/feedback/${id}`, {
+        feedback: {
+          ...params
+        }
+      });
+    } catch (e) {
+      throw e;
+    }
+  },
+  async deleteFeedback(id: string) {
+		setAuthorization();
+    try {
+      const response = await apiClient.delete(`/feedback/${id}`);
     } catch (e) {
       throw e;
     }
