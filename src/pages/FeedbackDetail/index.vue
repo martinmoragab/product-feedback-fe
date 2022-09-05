@@ -30,6 +30,12 @@
     })
   }
 
+  function goToEditFeedback() {
+    router.push({
+      name: 'EditFeedback',
+    })
+  }
+
 	async function getFeedbackInformation() {
 		try {
 			const feedbackItem = await ProductService.getFeedback(feedbackId);
@@ -56,6 +62,7 @@
 				class="blue"
 				type="primary"
 				size="large"
+        @click="goToEditFeedback"
 			>
 				Edit Feedback
 			</el-button>

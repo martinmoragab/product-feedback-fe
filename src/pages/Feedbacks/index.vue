@@ -1,5 +1,5 @@
 <script setup lang="ts">
-	import { ref, onBeforeMount } from 'vue';
+	import { ref, onBeforeMount, watch } from 'vue';
 	import type { Ref } from 'vue';
 	import useProductStore from '../../stores/ProductStore';
 	import TitleCard from './components/TitleCard.vue';
@@ -25,8 +25,13 @@
 		sortingOption.value = sortOption;
 	}
 
+	watch(filtersSelected, () => {
+		if (filtersSelected.value.includes('All')) productStore.setFeedbacks([]);
+		else productStore.setFeedbacks(filtersSelected.value)
+	})
+
 	onBeforeMount(() => {
-		productStore.setFeedbacks();
+		productStore.setFeedbacks(filtersSelected.value);
 	})
 
 </script>

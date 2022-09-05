@@ -29,7 +29,7 @@
 	<el-card v-else>
 		<div class="no-content">
 			<img src="@images/inspector.svg"/>
-			<h6>There is no feedback yet.</h6>
+			<h6>There are no feedbacks yet.</h6>
 			<p>Got a suggestion? Found a bug that needs to be squashed?</p>
 			<p>We love hearing about new ideas to improve our app.</p>
 			<el-button 
