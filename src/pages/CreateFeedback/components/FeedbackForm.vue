@@ -1,16 +1,31 @@
 <script lang="ts" setup>
-  import { reactive, ref } from 'vue';
-	import type { Ref } from 'vue';
+  import { reactive, ref, computed } from 'vue';
+  import { useRoute, useRouter } from 'vue-router';
 	import { FeedbackParams } from '../../@types';
+  import { Feedback } from '../../../stores/@types';
 	import useProductStore from '../../../stores/ProductStore';
 	import ProductService from '../../../services/Product';
 	import { FormInstance } from 'element-plus';
 
+  const props = defineProps({
+    type: {
+      type: String,
+      default: 'create'
+    }
+  })
+
+  const router = useRouter();
+  const { params } = useRoute();
+  const { id: feedbackId } = params as any;
+  
+  let feedback = {} as Feedback;
 	const categories = ['All', 'UI', 'UX', 'Bug', 'Enhancement', 'Feature'];
+	const statuses = ['Not Started', 'Planned', 'In Progress', 'Live'];
   const newFeedback = reactive({
     title: '',
     category: 'Feature',
     details: '',
+    status: '',
   });
   const rules = reactive({
     title: [
@@ -26,6 +41,12 @@
       }
     ],
     category: [
+      {
+        required: true,
+        trigger: 'change'
+      }
+    ],
+    status: [
       {
         required: true,
         trigger: 'change'
@@ -51,11 +72,17 @@
 	const productStore = useProductStore();
 	const productId = productStore.getProduct._id;
 
+  const formTitle = computed(() => {
+    return props.type === 'create' ? 'Create New Feedback' : `Editing '${ newFeedback.title }'`
+  })
+
 	async function createFeedback(formEl: FormInstance) {
 		const params: FeedbackParams = {
 			...newFeedback,
 			product: productId,
 		}
+
+    if (props.type === 'create') delete params.status;
 
 		await formEl.validate((valid) => {
 			if (!valid) {
@@ -64,18 +91,42 @@
 			}
 		})
 		try {
-			await ProductService.createFeedback(params);
-			formEl.resetFields();
+			if (props.type === 'create') await ProductService.createFeedback(params);
+      else await ProductService.editFeedback(params, feedbackId);
+			if (props.type === 'create') formEl.resetFields();
 			showSuccessAlert.value = true;
 		} catch (e) {
 			console.error(e);
 		}
 	}
 
+  async function deleteFeedback() {
+    try {
+      await ProductService.deleteFeedback(feedbackId);
+      router.push({
+        name: 'Feedbacks'
+      })
+		} catch (e) {
+			console.error(e);
+		}
+  }
+
 	function closeAlert() {
 		formHasError.value = false;
 		showSuccessAlert.value = false;
 	}
+
+  async function getFeedbackDetails() {
+    if (props.type === 'edit') {
+      feedback = await ProductService.getFeedback(feedbackId);
+      newFeedback.title = feedback.title;
+      newFeedback.category = feedback.category;
+      newFeedback.details = feedback.details;
+      newFeedback.status = feedback.status;
+    }
+  }
+
+  getFeedbackDetails();
 
 </script>
 
@@ -96,13 +147,16 @@
 		type="success"
 		v-if="showSuccessAlert"
 	>
-		Your feedback was successfully created!
+		Your feedback was successfully {{ props.type === 'create' ? 'created' : 'edited' }}!
 		<br>
 		<router-link to="/feedbacks">Take me to feedbacks list</router-link>
 	</el-alert>
   <el-card>
-    <div class="add-circle">+</div>
-    <h5>Create New Feedback</h5>
+    <div class="add-circle" v-if="props.type === 'create'">+</div>
+    <div class="add-circle" v-else>
+      <img src="../../../assets/images/edit-pencil.svg" />
+    </div>
+    <h5>{{ formTitle }}</h5>
     <el-form
       :model="newFeedback"
 			:rules="rules"
@@ -135,6 +189,22 @@
           </el-select>
         </el-form-item>
       </div>
+      <div class="input-item" v-if="props.type === 'edit'">
+        <h6 class="input-title">Update Status</h6>
+        <el-form-item
+          label="Change feedback state"
+          prop="status"
+        >
+          <el-select v-model="newFeedback.status">
+            <el-option
+              v-for="status in statuses"
+              :key="status"
+              :label="status"
+              :value="status"
+            />
+          </el-select>
+        </el-form-item>
+      </div>
       <div class="input-item">
         <h6 class="input-title">Feedback Detail</h6>
         <el-form-item
@@ -145,8 +215,15 @@
         </el-form-item>
       </div>
       <div class="action-buttons">
-        <el-button type="info">Cancel</el-button>
-        <el-button type="primary" @click="createFeedback(createFeedbackForm)">Add Feedback</el-button>
+        <div v-if="props.type === 'edit'">
+          <el-button type="danger" @click="deleteFeedback">Delete</el-button>
+        </div>
+        <div>
+          <el-button type="info">Cancel</el-button>
+          <el-button type="primary" @click="createFeedback(createFeedbackForm)">
+            {{ props.type === 'create' ? 'Add Feedback' : 'Save Feedback' }}
+          </el-button>
+        </div>
       </div>
     </el-form>
   </el-card>
@@ -173,7 +250,7 @@
     }
     .action-buttons {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
     }
   }
   .input-item {
