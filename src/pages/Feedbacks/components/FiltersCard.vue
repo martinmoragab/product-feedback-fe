@@ -13,7 +13,10 @@
 
 	watch(filtersSelected, (newVal, oldVal = []) => {
 		if (oldVal?.includes('All') && newVal.length > 1) filtersSelected.value = filtersSelected.value.filter(filter => filter !== 'All');
-		if (oldVal?.length > 1 && newVal.includes('All')) filtersSelected.value = ['All'];
+		if (
+			oldVal?.length > 1 && newVal.includes('All')
+			|| oldVal?.length === 1 && !oldVal?.includes('All') && newVal.includes('All')
+		) filtersSelected.value = ['All'];
 		emit('filtersSelected', filtersSelected.value);
 	}, { immediate: true });
 
