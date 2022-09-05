@@ -50,7 +50,7 @@
 </script>
 
 <template>
-	<el-card>
+	<el-card class="login-page">
     <h1>Log In</h1>
     <el-form
 			:model="loginForm"
@@ -73,7 +73,11 @@
 </template>
 
 <style lang="scss">
-	.form {
+  .login-page {
+    margin: auto;
+    max-width: 540px;
+  }
+  .form {
 		margin: auto;
 		width: 50vw;
 	}

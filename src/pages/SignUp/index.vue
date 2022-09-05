@@ -62,7 +62,7 @@
 </script>
 
 <template>
-	<el-card>
+	<el-card class="signup-page">
 		<h1>Sign Up</h1>
 		<el-form
 			:model="signupForm"
@@ -93,6 +93,10 @@
 </template>
 
 <style lang="scss">
+  .signup-page {
+    margin: auto;
+    max-width: 540px;
+  }
 	.form {
 		margin: auto;
 		width: 50vw;
