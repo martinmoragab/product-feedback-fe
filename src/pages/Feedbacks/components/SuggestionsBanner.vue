@@ -31,7 +31,7 @@
 <template>
 	<el-card class="banner">
 		<img src="@images/bulb.svg"/>
-		<h6>{{ suggestionsCount }} Suggestions</h6>
+		<h6>{{ suggestionsCount }} {{ suggestionsCount > 1 ? 'Suggestions' : 'Suggestion' }}</h6>
 		<p>Sort by:
 			<el-select
 				v-model="sortBy"
