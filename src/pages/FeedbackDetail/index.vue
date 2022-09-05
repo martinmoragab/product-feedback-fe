@@ -1,15 +1,18 @@
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { ref, computed } from 'vue';
   import type { Ref } from 'vue';
   import { useRouter, useRoute } from 'vue-router';
   import { Feedback } from '../../stores/@types';
 	import ProductService from '../../services/Product';
+  import useUserStore from '../../stores/UserStore';
   import FeedbackItem from '../Feedbacks/components/FeedbackItem.vue';
   import CommentsList from './components/CommentsList.vue';
   import AddCommentForm from './components/AddCommentForm.vue';
 
   const router = useRouter();
 	const route = useRoute();
+
+  const userStore = useUserStore();
 
 	const feedbackId = route.params.id;
   const feedback: Ref<Feedback> = ref({
@@ -40,10 +43,19 @@
 		try {
 			const feedbackItem = await ProductService.getFeedback(feedbackId);
 			feedback.value = feedbackItem;
+      console.log('feed', feedback.value)
 		} catch (e) {
 			console.error(e);
 		}
 	}
+
+  const canEdit = computed(() => {
+    const author = feedback.value.author;
+    const loggedUserId = userStore.getUser._id;
+
+    return author === loggedUserId;
+
+  })
 	
 	getFeedbackInformation();
 </script>
@@ -59,6 +71,7 @@
         <img src="@images/back-arrow.png"/>Go Back
       </el-button>
       <el-button
+        v-if="canEdit"
 				class="blue"
 				type="primary"
 				size="large"
