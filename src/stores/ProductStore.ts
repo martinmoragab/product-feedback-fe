@@ -22,16 +22,15 @@ const useProductStore = defineStore('ProductStore', {
         const response: Product[] = await ProductService.getProducts();
         this.products = response;
 				this.product = response[0];
-				await this.setFeedbacks();
+				await this.setFeedbacks([]);
       } catch (e) {
         throw e;
       }
     },
-		async setFeedbacks() {
+		async setFeedbacks(filters: string[] = []) {
 			const productId = this.product._id;
 			try {
-				const response: any = await ProductService.getFeedbacks(productId);
-				console.log('set res', response)
+				const response: any = await ProductService.getFeedbacks(productId, filters);
 				this.feedbacks = response.feedbacks;
 				this.roadmap = response.roadmapCounts;
 			} catch (e) {
