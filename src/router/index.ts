@@ -6,6 +6,9 @@ import Feedbacks from '@pages/Feedbacks/index.vue';
 import FeedbackDetails from '@pages/FeedbackDetail/index.vue';
 import CreateFeedback from '@pages/CreateFeedback/index.vue';
 import EditFeedback from '@pages/EditFeedback/index.vue';
+import Roadmap from '@pages/Roadmap/index.vue';
+import Products from '@pages/Products/index.vue';
+import CreateProduct from '@pages/CreateProduct/index.vue';
 
 const routes: Array<RouteRecordRaw> = [
 	{
@@ -24,12 +27,36 @@ const routes: Array<RouteRecordRaw> = [
 			requiresCredentials: false
 		}
 	},
+  {
+    path: '/createProduct',
+    name: 'CreateProduct',
+    component: CreateProduct,
+    meta: {
+      requiresCredentials: true,
+    }
+  },
 	{
-		path: '/feedbacks',
+		path: '/products',
+		name: 'Products',
+		component: Products,
+		meta: {
+			requiresCredentials: false
+		}
+	},
+	{
+		path: '/feedbacks/:id',
 		name: 'Feedbacks',
 		component: Feedbacks,
 		meta: {
-			requiresCredentials: true
+			requiresCredentials: false
+		}
+	},
+	{
+		path: '/roadmap/:id',
+		name: 'Roadmap',
+		component: Roadmap,
+		meta: {
+			requiresCredentials: false
 		}
 	},
 	{
@@ -37,7 +64,7 @@ const routes: Array<RouteRecordRaw> = [
 		name: 'FeedbackDetails',
 		component: FeedbackDetails,
 		meta: {
-			requiresCredentials: true
+			requiresCredentials: false
 		}
 	},
   {
@@ -60,7 +87,7 @@ const routes: Array<RouteRecordRaw> = [
 		path: '/:afterEvent(.*)',
 		redirect: () => {
 			return {
-				path: '/feedbacks'
+				path: '/products'
 			}
 		}
 	},
@@ -72,6 +99,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  window.scrollTo(0, 0);
 	const userStore = useUserStore();
 	/*
 		Check if 'to' route requires credentials.
@@ -79,7 +107,7 @@ router.beforeEach((to, from, next) => {
 	*/
 	if (to.meta.requiresCredentials && !userStore.token) {
 		next({
-			name: 'SignUp'
+			name: 'Products'
 		})
 	}
 	else next();
