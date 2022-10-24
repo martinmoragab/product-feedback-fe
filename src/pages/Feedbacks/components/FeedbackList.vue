@@ -1,20 +1,55 @@
 <script lang="ts" setup>
+  import { watch } from 'vue';
+  import type { Ref } from 'vue';
 	import { storeToRefs } from 'pinia';
 	import { useRouter } from 'vue-router';
 	import useProductStore from '../../../stores/ProductStore';
 	import FeedbackItem from './FeedbackItem.vue';
 
+  const props = defineProps({
+    sortingOption: {
+      type: Object as () => Ref<string>,
+      default: '',
+    }
+  })
+
 	const router = useRouter();
 	const productStore = useProductStore();
+  const productId = productStore.getProduct._id;
 
 	const { feedbacks } = storeToRefs(productStore);
+
+  function updateFeedbacks() {
+    let sortingOption = '';
+    switch (props.sortingOption.value) {
+      case 'Latest':
+        sortingOption = 'createdAt_desc'
+        break
+      case 'Most comments':
+        sortingOption = 'commentsLength_desc'
+        break
+      case 'Least comments':
+        sortingOption = 'commentsLength_asc'
+        break
+      case 'Most upvotes':
+        sortingOption = 'votes_desc'
+        break
+      case 'Least upvotes':
+        sortingOption = 'votes_asc'
+        break
+    };
+    productStore.setFeedbacks([], '', sortingOption);
+  }
 
 	function goToCreateFeedback() {
 		router.push({
 			name: 'CreateFeedback',
-			params: { id: 'asd' }
+			params: { id: productId }
 		})
 	}
+
+  watch(() => props.sortingOption, updateFeedbacks, { deep: true });
+
 </script>
 
 <template>
@@ -23,7 +58,6 @@
 			v-for="feedback in feedbacks"
 			:key="feedback._id"
 			:feedback="feedback"
-			@get-feedback="productStore.setFeedbacks"
 		/>
 	</ul>
 	<el-card v-else>

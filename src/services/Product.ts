@@ -1,5 +1,5 @@
 import { apiClient } from "./AxiosConfig";
-import { FeedbackParams } from "../pages/@types";
+import { FeedbackParams, Product } from "../pages/@types";
 import useUserStore from "../stores/UserStore";
 
 const setAuthorization = () => {
@@ -11,6 +11,15 @@ const setAuthorization = () => {
 }
 
 export default {
+  async createProduct(product: Product) {
+    setAuthorization();
+    try {
+      const response = await apiClient.post('/product', { product });
+      return response;
+    } catch (e) {
+      throw e;
+    }
+  },
 	async getProducts() {
     try {
       const response = await apiClient.get('/product');
@@ -19,9 +28,18 @@ export default {
       throw e;
     }
   },
-	async getFeedbacks(productId: string, filters: string[]) {
+  async getProduct(id: string) {
+    try {
+      const response = await apiClient.get(`/product/${id}`);
+      return response.data.product;
+    } catch (e) {
+      throw e;
+    }
+  },
+	async getFeedbacks(productId: string, filters: string[], status: string = '', sort: string = '') {
 		try {
-			const response = await apiClient.get(`/feedback/all/${productId}${ filters.length ? `?category=${ filters.toString(',') }` : '' }`);
+			const response = await apiClient.get(
+        `/feedback/all/${productId}${ filters.length ? `?category=${ filters.toString() }` : '' }${ status ? filters.length ? `&status=${ status }` : `?status=${ status }` : '' }${ sort ? filters.length || status ? `&sortBy=${sort}` : `?sortBy=${sort}` : ''}`);
 			const { feedbacks, roadmapCounts } = response.data;
 			return { feedbacks, roadmapCounts }
 		} catch (e) {

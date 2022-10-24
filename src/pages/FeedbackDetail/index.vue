@@ -2,6 +2,7 @@
   import { ref, computed } from 'vue';
   import type { Ref } from 'vue';
   import { useRouter, useRoute } from 'vue-router';
+  import openSocket from 'socket.io-client';
   import { Feedback } from '../../stores/@types';
 	import ProductService from '../../services/Product';
   import useUserStore from '../../stores/UserStore';
@@ -27,10 +28,8 @@
 		comments: [],
 	});
 
-  function goToFeedbacks() {
-    router.push({
-      name: 'Feedbacks'
-    })
+  function goBack() {
+    router.back();
   }
 
   function goToEditFeedback() {
@@ -43,7 +42,6 @@
 		try {
 			const feedbackItem = await ProductService.getFeedback(feedbackId);
 			feedback.value = feedbackItem;
-      console.log('feed', feedback.value)
 		} catch (e) {
 			console.error(e);
 		}
@@ -51,13 +49,21 @@
 
   const canEdit = computed(() => {
     const author = feedback.value.author;
-    const loggedUserId = userStore.getUser._id;
+    const loggedUserId = userStore.getUser?._id;
 
     return author === loggedUserId;
 
   })
 	
+
+  const socket = openSocket(import.meta.env.VITE_API_BASE_URL);
+  socket.on('newComment', data => {
+    const product = data.product;
+    if (feedbackId === data.feedbackId) getFeedbackInformation();
+  })
+
 	getFeedbackInformation();
+
 </script>
 
 <template>
@@ -65,7 +71,7 @@
     <div class="action-buttons">
       <el-button
 				class="back-button"
-				@click="goToFeedbacks"
+				@click="goBack"
 				link
 			>
         <img src="@images/back-arrow.png"/>Go Back

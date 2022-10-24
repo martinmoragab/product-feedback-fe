@@ -1,5 +1,10 @@
 <script setup lang="ts">
 	import { reactive } from 'vue';
+  import { useRouter } from 'vue-router';
+  import useUserStore from '../../stores/UserStore';
+
+	const userStore = useUserStore();
+  const router = useRouter();
 
 	const signupForm = reactive({
 		firstName: '',
@@ -56,8 +61,19 @@
 		]
 	})
 
-	function signup() {
-		console.log('SignUp form', signupForm);
+	async function signup() {
+    try {
+      await userStore.signUp(
+        signupForm.firstName,
+        signupForm.lastName,
+        signupForm.username,
+        signupForm.email,
+        signupForm.password
+      );
+      router.push({ name: 'Products' })
+    } catch (e) {
+      console.error(e);
+    }
 	}
 </script>
 

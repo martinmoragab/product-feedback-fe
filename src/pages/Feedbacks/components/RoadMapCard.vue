@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+  import { useRoute } from 'vue-router';
 	import { Roadmap } from '../../../stores/@types';
 
 	const props = defineProps({
@@ -7,13 +8,17 @@
 			required: true,
 		}
 	})
+
+  const route = useRoute();
+  const productId = route.params.id;
+
 </script>
 
 <template>
 	<el-card class="small road-map">
 		<div class="title-and-link">
 			<h6>Roadmap</h6>
-			<router-link to="/road-map">View</router-link>
+			<router-link :to="`/roadmap/${productId}`">View</router-link>
 		</div>
 		<div class="road-map-count">
 			<div class="status">

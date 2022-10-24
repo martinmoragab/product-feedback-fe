@@ -27,16 +27,31 @@ const useProductStore = defineStore('ProductStore', {
         throw e;
       }
     },
-		async setFeedbacks(filters: string[] = []) {
+    async selectProduct(productId: string) {
+      try {
+        const product = await ProductService.getProduct(productId);
+        this.product = product;
+        await this.setFeedbacks();
+      } catch (e) {
+        throw e;
+      }
+    },
+		async setFeedbacks(filters: string[] = [], status: string = '', sort: string = 'createdAt_desc') {
 			const productId = this.product._id;
 			try {
-				const response: any = await ProductService.getFeedbacks(productId, filters);
+				const response: any = await ProductService.getFeedbacks(productId, filters, status, sort);
 				this.feedbacks = response.feedbacks;
 				this.roadmap = response.roadmapCounts;
 			} catch (e) {
 				throw e;
 			}
 		},
+    clearProducts() {
+      this.product = {} as Product;
+      this.products = [] as Product[];
+      this.feedbacks = [] as Feedback[];
+      this.roadmap = {} as Roadmap;
+    },
   }
 });
 

@@ -3,11 +3,14 @@
 	import { FormInstance } from 'element-plus';
 	import { useRoute } from 'vue-router';
 	import ProductService from '../../../services/Product';
+  import useUserStore from '../../../stores/UserStore';
 
 	const emits = defineEmits([
 		'getFeedback'
 	]);
 
+  const userStore = useUserStore();
+  const { user } = userStore;
 	const route = useRoute();
 	const feedbackId = route.params.id;
 
@@ -67,6 +70,7 @@
   <el-card>
     <h6 class="title">Add Comment</h6>
     <el-form
+      :disabled="!user"
       :model="commentForm"
 			:rules="rules"
 			label-position="top"
@@ -81,7 +85,8 @@
 				/>
 			</el-form-item>
       <div class="characters-button">
-        <p>{{ charactersLeft }} characters left</p>
+        <p v-if="user">{{ charactersLeft }} characters left</p>
+        <p class="error-message" v-else>You must be logged in to comment</p>
         <el-button type="primary" @click="postComment(createCommentForm)">Post Comment</el-button>
       </div>
     </el-form>
@@ -96,5 +101,9 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
+    .error-message {
+      color: var(--danger);
+      font-weight: bold;
+    }
   }
 </style>

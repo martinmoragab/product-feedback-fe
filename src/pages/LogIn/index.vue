@@ -41,7 +41,7 @@
 		try {
 			await userStore.logIn(loginForm.email, loginForm.password);
 			router.push({
-				name: 'Feedbacks'
+				name: 'Products'
 			})
 		} catch (e) {
 			console.error(e);
@@ -66,9 +66,10 @@
 			</el-form-item>
 			<el-button type="primary" @click="login">Log In</el-button>
     </el-form>
-		<h6>
+		<h6 class="center">
 			Not registered? <router-link to="/signup">Sign Up!</router-link>
 		</h6>
+    <router-link class="center" to="/products">Continue as anonymous (spooky)</router-link>
 	</el-card>
 </template>
 
@@ -81,4 +82,9 @@
 		margin: auto;
 		width: 50vw;
 	}
+  .center {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+  }
 </style>

@@ -4,10 +4,8 @@
 
   const router = useRouter();
 
-  function goToFeedbacks() {
-    router.push({
-      name: 'Feedbacks',
-    })
+  function goBack() {
+    router.back()
   };
 </script>
 
@@ -16,7 +14,7 @@
     <el-button
 			class="back-button"
 			link
-			@click="goToFeedbacks"
+			@click="goBack"
 		>
       <img src="@images/back-arrow.png"/>Go Back
     </el-button>

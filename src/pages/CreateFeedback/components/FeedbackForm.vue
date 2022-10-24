@@ -19,7 +19,7 @@
   const { id: feedbackId } = params as any;
   
   let feedback = {} as Feedback;
-	const categories = ['All', 'UI', 'UX', 'Bug', 'Enhancement', 'Feature'];
+	const categories = ['UI', 'UX', 'Bug', 'Enhancement', 'Feature'];
 	const statuses = ['Not Started', 'Planned', 'In Progress', 'Live'];
   const newFeedback = reactive({
     title: '',
@@ -142,14 +142,12 @@
 	</el-alert>
 	<el-alert
 		@close="closeAlert"
-		effect='dark'
 		title="Success!"
-		type="success"
 		v-if="showSuccessAlert"
 	>
 		Your feedback was successfully {{ props.type === 'create' ? 'created' : 'edited' }}!
 		<br>
-		<router-link to="/feedbacks">Take me to feedbacks list</router-link>
+		<router-link :to="`/feedbacks/${productId}`">Take me to feedbacks list</router-link>
 	</el-alert>
   <el-card>
     <div class="add-circle" v-if="props.type === 'create'">+</div>
@@ -232,7 +230,7 @@
 <style lang="scss" scoped>
   .add-circle {
     position: absolute;
-    top: 100px;
+    top: 150px;
     display: flex;
     justify-content: center;
     align-items: center;

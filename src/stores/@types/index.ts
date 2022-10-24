@@ -7,10 +7,18 @@ export interface User {
 	products: Array<Object>;
 }
 
+export interface RenderError {
+  render: boolean;
+  message: string;
+}
+
 export interface Product {
 	_id: string;
-	name: string;
-	feedbacks: Feedback[];
+  feedbacks: Feedback[];
+  name: string;
+  author: string;
+  mainColor: string;
+  webpage: string;
 }
 
 export interface Feedback {

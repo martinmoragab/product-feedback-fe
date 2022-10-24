@@ -4,6 +4,12 @@ export interface Status {
 	count: number;
 }
 
+export interface Product {
+  name: string;
+  mainColor: string;
+  webpage: string;
+}
+
 export interface Feedback {
 	id: string;
 	title: string;
