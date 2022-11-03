@@ -32,9 +32,12 @@
     </span>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item v-if="user">
+        <div class="user-info" v-if="user">
+          <h6>{{ user.firstName }} {{ user.lastName }}</h6>
+          <p>@{{ user.username }}</p>
+          <el-divider />
           <el-button type="danger" @click="logOut">Log out</el-button>
-        </el-dropdown-item>
+        </div>
         <el-dropdown-item v-if="!user">
           <router-link to="/login">Log in</router-link>
         </el-dropdown-item>
@@ -49,5 +52,17 @@
 <style lang="scss" setup>
   a {
     text-decoration: none;
+  }
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 15px;
+    * {
+      margin: 0;
+    }
+    div {
+      margin: 0;
+    }
   }
 </style>
