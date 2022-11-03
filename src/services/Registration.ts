@@ -36,7 +36,10 @@ export default {
       apiClient.defaults.headers
         .common['Authorization'] = `Bearer ${token}`;
       return { user, token };
-    } catch(e) {
+    } catch(e: any) {
+      const userStore = useUserStore();
+      const message = e.response.data.message;
+      userStore.toggleErrorMessage(true, message);
       throw e;
     }
   }

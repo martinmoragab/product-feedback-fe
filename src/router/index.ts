@@ -101,6 +101,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   window.scrollTo(0, 0);
 	const userStore = useUserStore();
+  userStore.toggleErrorMessage(false, '');
 	/*
 		Check if 'to' route requires credentials.
 		If true and user not logged in, redirect to sign up. 
